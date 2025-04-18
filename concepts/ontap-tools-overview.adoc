@@ -1,0 +1,25 @@
+---
+permalink: concepts/ontap-tools-overview.html 
+sidebar: sidebar 
+keywords:  
+summary: ONTAP Tools für VMware vSphere ist eine Sammlung von Tools für das Lifecycle Management von Virtual Machines. Die Lösung lässt sich in das VMware Ecosystem integrieren und unterstützt bei der Bereitstellung, grundlegenden Sicherung und Disaster Recovery von Virtual Machines. 
+---
+= Überblick über die ONTAP Tools für VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP Tools für VMware vSphere sind eine Sammlung von Tools für das Lifecycle Management von Virtual Machines. Sie lässt sich in das VMware Ecosystem integrieren, um die Bereitstellung von Datastores zu unterstützen und bietet grundlegende Sicherung für Virtual Machines.
+
+Die ONTAP Tools für VMware vSphere sind eine Sammlung horizontal skalierbarer, ereignisgesteuerter Microservices, die als Open Virtual Appliance (OVA) implementiert werden. Diese Version verfügt über REST-API-Integration mit ONTAP.
+
+ONTAP Tools für VMware vSphere umfassen:
+
+* Funktionen von Virtual Machines wie grundlegende Sicherung und Disaster Recovery
+* VASA Provider für granulares VM-Management
+* Richtlinienbasiertes Storage-Management
+* Storage Replication Adapter (SRA)
+* SnapMirror aktiv/synchron (SMAS)
+

@@ -1,0 +1,63 @@
+---
+permalink: manage/migrate-virtual-machines.html 
+sidebar: sidebar 
+keywords:  
+summary: Sie sollten einige der Überlegungen bei der Migration von vorhandenen virtuellen Maschinen in Ihrem Rechenzentrum kennen. 
+---
+= Überlegungen zum Migrieren oder Klonen von Virtual Machines
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der Migration bestehender virtueller Maschinen in Ihrem Rechenzentrum sollten Sie einige Überlegungen beachten.
+
+
+
+== Migrieren Sie geschützte Virtual Machines
+
+Sie können die geschützten virtuellen Maschinen migrieren in:
+
+* Derselbe VVols-Datastore auf einem anderen ESXi-Host
+* Unterschiedliche kompatible VVols-Datastores auf demselben ESXi-Host
+* Unterschiedliche kompatible VVols-Datastores auf einem anderen ESXi-Host
+
+
+Wenn die Virtual Machine in ein anderes FlexVol Volume migriert wird, wird auch die entsprechende Metadatendatei mit den Informationen der Virtual Machine aktualisiert. Wenn eine virtuelle Maschine zu einem anderen ESXi-Host, aber demselben Storage migriert wird, wird die zugrunde liegende FlexVol-Volume-Metadatendatei nicht geändert.
+
+
+
+== Klonen geschützter Virtual Machines
+
+Sie können geschützte Virtual Machines folgendermaßen klonen:
+
+* Derselbe Container desselben FlexVol Volumes mithilfe der Replizierungsgruppe
++
+Die Metadatendatei dieses FlexVol Volume wird mit den geklonten Virtual Machines aktualisiert.
+
+* Derselbe Container eines anderen FlexVol Volumes unter Verwendung der Replizierungsgruppe
++
+Das FlexVol Volume, auf dem die geklonte Virtual Machine gespeichert wird, wird die Metadatendatei mit den Details der geklonten Virtual Machine aktualisiert.
+
+* Unterschiedlicher Container oder VVols Datastore
++
+Dem FlexVol Volume, auf dem die geklonte Virtual Machine gespeichert wird, werden die Metadatendatei die Details der Virtual Machine aktualisiert.
+
+
+
+VMware unterstützt derzeit keine virtuellen Maschinen, die in einer VM-Vorlage geklont wurden.
+
+Der Klon einer geschützten Virtual Machine wird unterstützt.
+
+Weitere Informationen finden Sie unter https://docs.vmware.com/en/VMware-Horizon/2103/virtual-desktops/GUID-B5020738-8649-4308-A8B0-70AF80527DF6.html["Erstellen einer virtuellen Maschine zum Klonen"].
+
+
+
+== Snapshots Von Virtual Machines
+
+Derzeit werden nur Snapshots virtueller Maschinen ohne Speicher unterstützt. Wenn auf einer virtuellen Maschine Snapshot mit Arbeitsspeicher vorhanden ist, wird die virtuelle Maschine nicht als Schutz betrachtet.
+
+Sie können auch nicht geschützte virtuelle Maschinen mit einem Speicher-Snapshot schützen. Für diesen Release sollten Sie den Speicher-Snapshot löschen, bevor Sie den Schutz für die virtuelle Maschine aktivieren.
+
+Bei Windows VM mit ASA r2 Storage-Typ ist es ein schreibgeschützter Snapshot, wenn Sie einen Snapshot der virtuellen Maschine erstellen. Wenn die VM beim Einschalten eingeschaltet wird, erstellt der VASA Provider eine LUN mit dem schreibgeschützten Snapshot und aktiviert sie anschließend für IOPS. Während der Anforderung zum Ausschalten löscht VASA Provider die erstellte LUN und deaktiviert anschließend die IOPS.

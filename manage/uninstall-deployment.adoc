@@ -1,0 +1,40 @@
+---
+permalink: manage/uninstall-deployment.html 
+sidebar: sidebar 
+keywords: ONTAP tools,Storage Replication Adapter 
+summary: Befolgen Sie die Anweisungen in diesem Abschnitt, um Ihre ONTAP-Tools für die VMware vSphere-Bereitstellung ordnungsgemäß zu beenden. 
+---
+= Deinstallieren Sie die ONTAP-Tools für VMware vSphere
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durch das Deinstallieren der ONTAP-Tools für VMware vSphere werden alle Daten in den Tools gelöscht.
+
+.Schritte
+. Entfernen oder verschieben Sie alle virtuellen Maschinen aus den ONTAP-Tools für von VMware vSphere gemanagte Datastores.
++
+** Informationen zum Entfernen der virtuellen Maschinen finden Sie unter https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-virtual-machine-administration-guide-8-0/managing-virtual-machinesvsphere-vm-admin/adding-and-removing-virtual-machinesvsphere-vm-admin.html#GUID-376174FE-F936-4BE4-B8C2-48EED42F110B-en["Entfernen Sie VMs und VM-Vorlagen und registrieren Sie sie erneut"]
+** Informationen zum Verschieben in einen nicht verwalteten Datastore finden Sie unter https://techdocs.broadcom.com/it/it/vmware-cis/vsphere/vsphere/8-0/vcenter-and-host-management-8-0/migrating-virtual-machines-host-management/migration-with-vmotion-host-management/migration-with-storage-vmotion-host-management.html["Storage vMotion"]
+
+
+. link:../manage/delete-ds.html["Löschen Sie Datastores"] Auf ONTAP Tools für VMware vSphere erstellt.
+. Wenn Sie den VASA-Provider aktiviert haben, wählen Sie in den ONTAP-Tools *Einstellungen* > *VASA-Provider-Einstellungen* > *Registrierung aufheben* aus, um die Registrierung der VASA-Anbieter von allen vCenter-Servern aufzuheben.
+. Aufheben der Zuordnung aller Speicher-Back-Ends zur vCenter Server-Instanz. Siehe link:../manage/manage-vcenter.html["Trennen Sie Storage Back-Ends von der vCenter Server-Instanz"].
+. Löschen Sie alle Speicher-Back-Ends. Siehe link:../manage/storage-backend.html["Managen von Storage-Back-Ends"].
+. Entfernen Sie den SRA-Adapter aus VMware Live Site Recovery:
++
+.. Melden Sie sich als Administrator an der VMware Live Site Recovery-Appliance-Managementschnittstelle über Port 5480 an.
+.. Wählen Sie *Storage Replication Adapter* Aus.
+.. Wählen Sie die entsprechende SRA-Karte aus, und wählen Sie im Dropdown-Menü *Löschen* aus.
+.. Bestätigen Sie, dass Sie die Ergebnisse des Löschens des Adapters kennen, und wählen Sie *Löschen*.
+
+
+. Löschen Sie die in den ONTAP Tools für VMware vSphere gespeicherten vCenter Server-Instanzen. Siehe link:../manage/manage-vcenter.html["Verwalten von vCenter Server-Instanzen"].
+. Schalten Sie die ONTAP-Tools für VMware vSphere-VMs vom vCenter-Server aus und löschen Sie die VMs.
+
+
+.Was kommt als Nächstes?
+link:../manage/delete-deployment.html["Entfernen Sie FlexVol Volumes"]

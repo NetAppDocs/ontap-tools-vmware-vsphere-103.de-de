@@ -1,0 +1,59 @@
+---
+sidebar: sidebar 
+permalink: automation/learn-rest-api.html 
+keywords: ontap tools vmware vsphere rest api 
+summary: ONTAP Tools für VMware vSphere 10 ist eine Sammlung von Tools für das Lifecycle Management von Virtual Machines. Sie umfasst eine zuverlässige REST-API, die Sie als Teil Ihrer Automatisierungsprozesse nutzen können. 
+---
+= Erfahren Sie mehr über die ONTAP-Tools für VMware vSphere 10 REST-API
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP Tools für VMware vSphere 10 ist eine Sammlung von Tools für das Lifecycle Management von Virtual Machines. Sie umfasst eine zuverlässige REST-API, die Sie als Teil Ihrer Automatisierungsprozesse nutzen können.
+
+
+
+== REST-Web-Services-Grundlage
+
+Representational State Transfer (REST) ist ein Stil zur Erstellung verteilter Webanwendungen, einschließlich des Designs von Webservices-APIs. Es wird eine Reihe von Technologien zur Offenlegung serverbasierter Ressourcen und zur Verwaltung ihrer Zustände eingeführt.
+
+.Ressourcen- und Zustandsdarstellung
+Ressourcen sind die grundlegenden Komponenten einer REST-Web-Services-Anwendung. Beim Entwurf einer REST-API gibt es zwei wichtige Anfangsaufgaben:
+
+* Ermitteln Sie die System- oder serverbasierten Ressourcen
+* Definieren Sie den Ressourcenstatus und die zugehörigen Statusübergangsvorgänge
+
+
+Client-Anwendungen können die Ressourcenzustände über genau definierte Nachrichtenflüsse anzeigen und ändern.
+
+.HTTP-Meldungen
+Hypertext Transfer Protocol (HTTP) ist das Protokoll, das vom Web Services-Client und -Server zum Austausch von Nachrichten über die Ressourcen verwendet wird. Es folgt dem CRUD-Modell auf der Grundlage der generischen Vorgänge Erstellen, Lesen, Aktualisieren und Löschen. Das HTTP-Protokoll enthält Anforderungs- und Antwortheader sowie Antwortstatuscodes.
+
+.JSON-Datenformatierung
+Obwohl mehrere Nachrichtenformate verfügbar sind, ist die beliebteste Option JavaScript Object Notation (JSON). JSON ist ein Industriestandard für die Darstellung einfacher Datenstrukturen im Klartext und dient zur Übertragung von Statusinformationen, die die Ressourcen und gewünschten Aktionen beschreiben.
+
+.Sicherheit
+Sicherheit ist ein wichtiger Aspekt einer REST-API. Zusätzlich zum TLS-Protokoll (Transport Layer Security) zum Schutz des HTTP-Datenverkehrs über das Netzwerk verwendet die ONTAP Tools für die VMware vSphere 10 REST API auch Zugriffstoken für die Authentifizierung. Sie müssen ein Zugriffstoken erwerben und für nachfolgende API-Aufrufe verwenden.
+
+.Unterstützung für asynchrone Anfragen
+Die ONTAP-Tools für VMware vSphere 10 REST API führen die meisten Anfragen synchron aus und geben einen Statuscode zurück, sobald der Vorgang abgeschlossen ist. Sie unterstützt auch die asynchrone Verarbeitung für Aufgaben, die eine längere Zeit benötigen.
+
+
+
+== ONTAP Tools Manager-Umgebung
+
+Es gibt mehrere Aspekte der ONTAP Tools Manager Umgebung, die Sie berücksichtigen sollten.
+
+.Virtual Machine
+ONTAP Tools für VMware vSphere 10 werden mit der vSphere Remote-Plug-in-Architektur implementiert. Die Software, einschließlich der Unterstützung für die REST-API, wird auf einer separaten Virtual Machine ausgeführt.
+
+.IP-Adresse des ONTAP Tools
+Die ONTAP Tools für VMware vSphere 10 bieten eine einzige IP-Adresse, die ein Gateway für die Funktionen der Virtual Machine bereitstellt. Sie müssen die Adresse während der Erstkonfiguration angeben und sie ist einer internen Komponente des Load Balancers zugewiesen. Die Adresse wird von der Benutzeroberfläche des ONTAP Tools Managers sowie für den direkten Zugriff auf die Dokumentationsseite und die REST-API von Swagger verwendet.
+
+.Zwei REST-APIs
+Zusätzlich zu den ONTAP-Tools für die VMware vSphere 10-REST-API verfügt der ONTAP-Cluster über eine eigene REST-API. Der ONTAP-Tools-Manager verwendet die ONTAP-REST-API als Client, um Storage-bezogene Aufgaben auszuführen. Es ist wichtig, daran zu denken, dass diese beiden APIs separat und eindeutig sind. Weitere Informationen finden Sie unter https://docs.netapp.com/us-en/ontap-automation/["ONTAP-Automatisierung"^].

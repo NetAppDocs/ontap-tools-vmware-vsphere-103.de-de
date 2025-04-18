@@ -1,0 +1,60 @@
+---
+permalink: manage/edit-appliance-settings.html 
+sidebar: sidebar 
+keywords:  
+summary: Sie können das Administratorkennwort mit dem ONTAP Tools Manager ändern. 
+---
+= Ändern Sie ONTAP-Tools für die VMware vSphere Konfiguration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mithilfe des ONTAP Tools Managers können Sie die Konfiguration der ONTAP Tools für VMware vSphere vertikal skalieren, um die Anzahl der Knoten in der Implementierung zu erhöhen oder die Konfiguration in die Einrichtung für Hochverfügbarkeit (HA) zu ändern. Die ONTAP Tools für die VMware vSphere Appliance werden zunächst in einer Konfiguration ohne HA-Konfiguration mit einem einzelnen Node implementiert.
+
+*Bevor Sie beginnen*
+
+* Stellen Sie sicher, dass Ihre OVA-Vorlage die gleiche OVA-Version wie Knoten 1 hat. Knoten 1 ist der Standardknoten, auf dem die ONTAP-Tools für VMware vSphere OVA ursprünglich bereitgestellt werden.
+* Stellen Sie sicher, dass der CPU-Hot-Plug-Speicher und der Hot-Plug-Speicher aktiviert sind.
+
+
+.Schritte
+. Starten Sie den ONTAP Tools Manager über einen Webbrowser: `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
+. Melden Sie sich mit den ONTAP Tools für VMware vSphere Administrator-Anmeldeinformationen an, die Sie während der Implementierung angegeben haben.
+. Wählen Sie im Übersichtsbereich die Option *Geräteeinstellungen bearbeiten* aus.
+. Im Abschnitt *Konfiguration* können Sie vertikal skalieren, um die Knotengröße zu erhöhen und die HA-Konfiguration nach Ihren Anforderungen zu aktivieren. Sie benötigen die vCenter Server-Anmeldeinformationen, um Änderungen vorzunehmen.
++
+Wenn sich ONTAP Tools in der HA-Konfiguration befinden, können Sie die Details der Content Library ändern. Geben Sie das Kennwort erneut für die neue Einreichung der Bearbeitung ein.
+
++
+
+NOTE: In ONTAP Tools für VMware vSphere können Sie nur die Node-Größe erhöhen. Sie können die Node-Größe nicht verkleinern. In einem nicht-HA-Setup wird nur eine mittelgroße Konfiguration unterstützt. Bei einer HA-Einrichtung werden mittelgroße und große Konfigurationen unterstützt.
+
+. Aktivieren Sie die HA-Konfiguration mit der HA-Toggle-Taste. Stellen Sie auf der Seite *HA settings* Folgendes sicher:
++
+** Die Inhaltsbibliothek gehört zum gleichen vCenter Server, auf dem die ONTAP Tools-Knoten-VMs ausgeführt werden. VCenter Server-Anmeldeinformationen werden verwendet, um die OVA-Vorlage für Appliance-Änderungen zu validieren und herunterzuladen.
+** Die virtuelle Maschine, die die ONTAP-Tools hostet, wird nicht direkt auf einem ESXi-Host bereitgestellt. Die VM sollte auf einem Cluster oder einem Ressourcen-Pool bereitgestellt werden.
++
+
+NOTE: Sobald die HA-Konfiguration aktiviert ist, können Sie sie nicht auf eine Konfiguration ohne HA-Konfiguration mit einem einzelnen Node zurücksetzen.
+
+
+
+. Im Abschnitt *HA-Einstellungen* des Fensters *Appliance-Einstellungen bearbeiten* können Sie die Details der Knoten 2 und 3 eingeben. Die ONTAP Tools für VMware vSphere unterstützen drei Nodes im HA-Setup.
++
+
+NOTE: Die meisten Eingabeoptionen sind zur Vereinfachung des Workflows mit Netzwerkdetails von Knoten 1 vorausgefüllt. Sie können die Eingabedaten jedoch bearbeiten, bevor Sie zur letzten Seite des Assistenten navigieren. Sie können IPv6-Adressdetails für die anderen beiden Knoten nur eingeben, wenn die IPv6-Adresse auf dem ersten Knoten aktiviert ist.
+
++
+Stellen Sie sicher, dass ein ESXi-Host nur eine VM mit ONTAP Tools enthält. Die Eingaben werden jedes Mal validiert, wenn Sie zum nächsten Fenster wechseln.
+
+. Überprüfen Sie die Details im Abschnitt *Zusammenfassung* und speichern Sie die Änderungen.
+
+
+.Was kommt als Nächstes?
+Die Seite *Übersicht* zeigt den Status der Bereitstellung an. Mithilfe der Job-ID können Sie auch den Jobstatus der Geräteeinstellungen bearbeiten in der Jobansicht verfolgen.
+
+Wenn die HA-Bereitstellung fehlschlägt und der Status des neuen Node als ‘Neu angezeigt wird, löschen Sie die neue VM in vCenter, bevor Sie den HA-Vorgang aktivieren erneut versuchen.
+
+Auf der Registerkarte *Alerts* im linken Bereich werden Warnungen für ONTAP-Tools für VMware vSphere aufgelistet.

@@ -1,0 +1,25 @@
+---
+permalink: manage/disable-autosupport.html 
+sidebar: sidebar 
+keywords:  
+summary: Bei der ersten Konfiguration des Speichersystems ist AutoSupport standardmäßig aktiviert. Es sendet 24 Stunden nach der Aktivierung Meldungen an den technischen Support. 
+---
+= Deaktivieren Sie AutoSupport
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei der ersten Konfiguration des Speichersystems ist AutoSupport standardmäßig aktiviert. Es sendet 24 Stunden nach der Aktivierung Meldungen an den technischen Support. Wenn Sie AutoSupport deaktivieren, erhalten Sie keinen proaktiven Support und keine Überwachung mehr.
+
+
+NOTE: Es wird empfohlen, AutoSupport zu aktivieren. Das hilft, Probleme schneller zu erkennen und zu lösen. Das System erfasst AutoSupport-Informationen und speichert diese lokal, auch wenn sie deaktiviert sind.
+
+.Schritte
+. Öffnen Sie vom vCenter Server aus die Wartungskonsole.
+. Melden Sie sich als Wartungbenutzer an.
+. Geben Sie 1 ein, um *Anwendungskonfiguration* auszuwählen.
+. Geben Sie 3 ein, um *AutoSupport deaktivieren* auszuwählen.
+. Geben Sie im Bestätigungsdialogfeld y ein.
+

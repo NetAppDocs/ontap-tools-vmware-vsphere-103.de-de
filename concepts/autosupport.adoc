@@ -1,0 +1,18 @@
+---
+permalink: concepts/autosupport.html 
+sidebar: sidebar 
+keywords:  
+summary: AutoSupport ist ein Mechanismus, der proaktiv den Zustand Ihres Systems überwacht und automatisch Meldungen an den technischen Support von NetApp, Ihre interne Support-Abteilung und einen Support-Partner sendet. 
+---
+= AutoSupport
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+AutoSupport ist ein Mechanismus, der proaktiv den Zustand Ihres Systems überwacht und automatisch Meldungen an den technischen Support von NetApp, Ihre interne Support-Abteilung und einen Support-Partner sendet.
+
+AutoSupport ist standardmäßig aktiviert, wenn Sie das Storage-System zum ersten Mal konfigurieren. AutoSupport beginnt 24 Stunden nach Aktivierung von AutoSupport mit dem Senden von Meldungen an den technischen Support.
+
+Sie können AutoSupport über die Wartungskonsolenoption *Anwendungskonfiguration* > *AutoSupport deaktivieren* deaktivieren. Es wird empfohlen, die Funktion aktiviert zu lassen. Durch das Aktivieren von AutoSupport werden Probleme schneller erkannt und schneller gelöst. Das System erfasst AutoSupport-Informationen und speichert diese lokal, selbst wenn die AutoSupport deaktiviert ist. Der Bericht wird jedoch nicht an ein Netzwerk gesendet. Sie müssen die Proxy-url über die Wartungskonsole der ersten VM bereitstellen. Verwenden Sie die Option *Anwendungskonfiguration* > *AutoSupport-Proxy-URL aktualisieren*, um die Proxy-URL einzugeben.

@@ -1,0 +1,64 @@
+---
+permalink: release-notes/whats-new.html 
+sidebar: sidebar 
+keywords: 'what"s new, release notes, 10.3, ONTAP tools for VMware vSphere' 
+summary: Erfahren Sie mehr über die neuen Funktionen in den ONTAP Tools für VMware vSphere 10.3. 
+---
+= Neuerungen bei ONTAP Tools für VMware vSphere 10.3
+:allow-uri-read: 
+
+
+[role="lead"]
+Erfahren Sie mehr über die neuen Funktionen in den ONTAP Tools für VMware vSphere 10.3.
+
+[cols="30%,70%"]
+|===
+| Aktualisieren | Beschreibung 
+
+
+ a| 
+Unterstützung neuer Plattform- und Applikationsversionen
+ a| 
+Die ONTAP-Tools für VMware vSphere 10.3 unterstützen jetzt folgende Plattform- und Anwendungsversionen:
+
+* ONTAP 9.16.0 und höher
+* VMware vSphere 8.0 U3
+* VMware Live Site Recovery 9.0
+
+
+
+
+ a| 
+Einfache Implementierung
+ a| 
+Sie können jetzt ONTAP Tools für VMware vSphere 10.3 mit den Mindestanforderungen für ein Single-Node-Cluster implementieren und anschließend auf eine HA- oder Multi-Node-Implementierung aktualisieren.
+
+
+
+ a| 
+Nahtlose Bereitstellung und Konfiguration
+ a| 
+ONTAP Tools für VMware vSphere 10.3 hat die mit Trident verbundenen Abhängigkeiten beseitigt und verwendet jetzt die dynamische Storage-bereitstellung, um eine nahtlose Bereitstellung und Konfiguration zu ermöglichen.
+
+
+
+ a| 
+Verbesserte Sicherheit für REST-API-Authentifizierung
+ a| 
+ONTAP-Tools für VMware vSphere 10.3 verlassen sich jetzt auf CA-signierte Zertifikate für ONTAP-Tools REST-APIs und Benutzeroberfläche, um eine höhere Sicherheit zu bieten.
+
+
+
+ a| 
+Unterstützung für ASA r2-Systeme
+ a| 
+ONTAP Tools für VMware vSphere 10.3 unterstützen die Bereitstellung von VMFS-Datenspeichern auf ASA r2 Systemen zur Sicherung von VMFS-Datastores mit aktiver SnapMirror Synchronisierung und SRA/VMware Live Site Recovery.
+
+
+
+ a| 
+Verbesserte Beobachtbarkeit
+ a| 
+ONTAP-Tools für VMware vSphere 10.3 erweitern die Unterstützung von Observability-Metriken für VMFS und vVol Datastores und ihre jeweiligen VMs.
+
+|===

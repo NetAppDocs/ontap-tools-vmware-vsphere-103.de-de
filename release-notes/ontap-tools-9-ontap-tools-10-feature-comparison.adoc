@@ -1,0 +1,43 @@
+---
+permalink: release-notes/ontap-tools-9-ontap-tools-10-feature-comparison.html 
+sidebar: sidebar 
+keywords: release notes, feature, comparison 
+summary: Erfahren Sie mehr über den Vergleich der Funktionen der ONTAP Tools für VMware vSphere 9 und der ONTAP Tools für VMware vSphere 10 
+---
+= Vergleich der Funktionen der ONTAP Tools für VMware vSphere 9 und der ONTAP Tools für VMware vSphere 10
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Erfahren Sie, ob eine Migration von ONTAP-Tools für VMware vSphere 9 zu ONTAP-Tools für VMware vSphere 10.1 oder höhere Versionen die richtige Lösung für Sie ist. Aktuelle Informationen zur Kompatibilität finden Sie unter https://mysupport.netapp.com/matrix["NetApp Interoperabilitäts-Matrix-Tool"^].
+
+[cols="20%,25%,25%,30%"]
+|===
+| Funktion | ONTAP-Tools 9.13 | ONTAP-Tools 10.1 | ONTAP-Tools ab Version 10.2 
+
+
+| Wichtiges Wertversprechen | Optimieren und vereinfachen Sie den täglichen Betrieb von 0 bis 2 durch verbesserte Sicherheits-, Compliance- und Automatisierungsfunktionen | Entwicklung der ONTAP Tools 10.x in Richtung 9.x-Parität mit erweiterter Hochverfügbarkeit, Performance und Skalierungslimits | Erweiterte Unterstützung auf FC für VMFS und VVols, und NVMe-of/FC, NVMe-of/TCP nur für VMFS. Benutzerfreundliche NetApp SnapMirror, einfache Einrichtung von vSphere Metro Storage-Clustern und Unterstützung für VMware Live Site Recovery an drei Standorten 
+
+
+| ONTAP Release Qualification | ONTAP 9.9.1 bis ONTAP 9.15.1 | ONTAP 9.12.1 bis ONTAP 9.14.1 | ONTAP 9.12.1 bis ONTAP 9.15.1 für ONTAP Tools 10.2 ONTAP 9.14.1, 9.15.1 und 9.16.0 für ONTAP Tools 10.3. 
+
+
+| VMware Versionsunterstützung | VSphere 7.x-8.x VMware Site Recovery Manager (SRM) 8.5 auf VMware Live Site Recovery 9.0 | VSphere 7.x-8.x VMware Site Recovery Manager (SRM) 8.7 auf VMware Live Site Recovery 9.0 | VSphere 7.x-8.x VMware Site Recovery Manager (SRM) 8.7 auf VMware Live Site Recovery 9.0 
+
+
+| Protokollunterstützung | NFS- und VMFS-Datastores: NFS (v3 und v4.1), VMFS (iSCSI und FCP) VVols-Datastores: ISCSI, FCP, NVMe/FC, NFS v3 | NFS- und VMFS-Datastores: NFS (v3 und v4.1), VMFS (iSCSI) VVols-Datastores: ISCSI, NFS v3 | NFS- und VMFS-Datastores: NFS (v3 und v4.1), VMFS (iSCSI/FCP/NVMe-of) VVols-Datastores: ISCSI, FCP, NFS v3 
+
+
+| Skalierbarkeit | Hosts und VMs: 300 Hosts, bis zu 10.000 VMs Datastores: 600 NFS, bis zu 50 VMFS, bis zu 250 VVols: Bis zu 14,000 | Hosts und VMs: 600 Hosts VVols: Bis zu 140,000 | Hosts und VMs: 600 Hosts VVols: Bis zu 140,000 
+
+
+| Beobachtbarkeit | Dashboards für Performance-, Kapazitäts- und Host-Compliance, dynamische VM- und Datastore-Berichte | Aktualisierte Dashboards für Performance, Kapazität und Host Compliance, dynamische VM- und Datastore-Berichte | Aktualisierte Dashboards für Performance, Kapazität und Host Compliance, dynamische VM- und Datastore-Berichte 
+
+
+| Datensicherung | SRA-Replizierung für VMFS und NFS FlexVols basierte Replizierung für VVols SCV-Integration und Interoperabilität für Backups | SRA-Replizierung für iSCSI VMFS und NFS v3 Datastores | SRA-Replizierung für iSCSI-VMFS und NFS v3-Datastores Schutz für drei Standorte durch Kombination von SMAS und VMware Live Site Recovery. 
+
+
+| VASA Provider-Support | VASA 4,0 | VASA 3,0 | VASA 3,0 
+|===

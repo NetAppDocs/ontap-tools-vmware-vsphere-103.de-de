@@ -1,0 +1,164 @@
+---
+permalink: concepts/ontap-tools-concepts-terms.html 
+sidebar: sidebar 
+keywords:  
+summary: Im folgenden Abschnitt werden die wichtigsten Konzepte und Begriffe beschrieben, die in diesem Dokument verwendet werden. 
+---
+= Schlüsselkonzepte und -Begriffe
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Im folgenden Abschnitt werden die wichtigsten Konzepte und Begriffe beschrieben, die in diesem Dokument verwendet werden.
+
+
+
+=== ASA r2-Systeme
+
+Die neuen NetApp ASA r2 Systeme bieten eine einheitliche Hardware- und Softwarelösung, mit der eine vereinfachte Benutzererfahrung speziell für die Anforderungen von reinen SAN-Kunden erzielt wird. https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["Erfahren Sie mehr über ASA r2 Storage-Systeme"].
+
+
+
+=== Zertifizierungsstelle (CA)
+
+CA ist eine vertrauenswürdige Einheit, die SSL-Zertifikate (Secure Sockets Layer) ausgibt.
+
+
+
+=== Konsistenzgruppe
+
+Eine Konsistenzgruppe ist eine Sammlung von Volumes, die als eine Einheit gemanagt werden. In ONTAP sorgen Konsistenzgruppen für ein einfaches Management und eine Garantie für die Sicherung eines Applikations-Workloads, der sich über mehrere Volumes erstreckt. Erfahren Sie mehr über https://docs.netapp.com/us-en/ontap/consistency-groups/index.html["Konsistenzgruppe"].
+
+
+
+=== Dual-Stack
+
+Ein Dual-Stack-Netzwerk ist eine Netzwerkumgebung, die die gleichzeitige Verwendung von IPv4- und IPv6-Adressen unterstützt.
+
+
+
+=== Hochverfügbarkeit
+
+Cluster Nodes werden für einen unterbrechungsfreien Betrieb in HA-Paaren konfiguriert.
+
+
+
+=== Logical Unit Number (LUN)
+
+Eine LUN ist eine Zahl, mit der eine logische Einheit innerhalb eines Storage Area Network (SAN) identifiziert wird. Bei diesen adressierbaren Geräten handelt es sich in der Regel um logische Laufwerke, auf die über das SCSI-Protokoll (Small Computer System Interface) oder eines seiner gekapselten Derivate zugegriffen wird.
+
+
+
+=== NVMe-Namespace und -Subsystem
+
+Ein NVMe Namespace ist eine Menge nicht-flüchtiger Speicher, der in logische Blöcke formatiert werden kann. Namespaces sind das Äquivalent von LUNs für FC- und iSCSI-Protokolle, und ein NVMe-Subsystem entspricht einer igroup. Ein NVMe-Subsystem kann Initiatoren zugeordnet werden, sodass die zugehörigen Initiatoren auf Namespaces innerhalb des Subsystems zugreifen können.
+
+
+
+=== ONTAP Tools Manager
+
+Der ONTAP Tools Manager bietet ONTAP Tools für VMware vSphere Administratoren mehr Kontrolle über die gemanagten vCenter Server Instanzen und On-Board Storage Backends. ONTAP Tools Manager unterstützt Sie beim Management von vCenter Server-Instanzen, Speicher-Back-Ends, Zertifikaten, Passwörtern und Download von Protokollpaketen.
+
+
+
+=== Offene virtuelle Appliance (OVA)
+
+OVA ist ein offener Standard für die Paketierung und Verteilung virtueller Appliances oder Software, die auf virtuellen Maschinen ausgeführt werden müssen.
+
+
+
+=== Recovery-Zeitpunkt (RPO)
+
+RPO ist ein Maß für die Häufigkeit von Daten-Backups bzw. -Replikation. Er gibt den Zeitpunkt an, zu dem Daten nach einem Ausfall wiederhergestellt werden müssen, um den Geschäftsbetrieb wieder aufzunehmen. Wenn ein Unternehmen beispielsweise einen RPO von 4 Stunden hat, kann ein Datenverlust bei einem Ausfall von bis zu 4 Stunden toleriert werden.
+
+
+
+=== SnapMirror aktiv/synchron (SMAS)
+
+SnapMirror Active Sync ermöglicht Business Services auch bei einem vollständigen Standortausfall den Betrieb weiter und unterstützt Applikationen bei einem transparenten Failover mithilfe einer sekundären Kopie. Um einen Failover mit SnapMirror Active Sync auszulösen, sind manuelle Eingriffe oder benutzerdefiniertes Scripting erforderlich. Lear mehr über https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html["SnapMirror Active Sync"].
+
+
+
+=== Storage-Back-Ends
+
+Storage-Back-Ends sind die zugrunde liegende Storage-Infrastruktur, die der ESXi Host zum Speichern von Virtual Machine-Dateien, Daten und anderen Ressourcen verwendet. Über das Storage-Backend kann der ESXi Host auf persistente Daten zugreifen und diese managen. Die erforderliche Storage-Kapazität und Performance für virtualisierte Umgebungen wird bereitgestellt.
+
+
+
+=== Storage Replication Adapter (SRA)
+
+SRA ist die spezifische Storage-Software eines Anbieters, die innerhalb der VMware Live Site Recovery Appliance installiert wird. Der Adapter ermöglicht die Kommunikation zwischen Site Recovery Manager und einem Storage Controller auf Storage Virtual Machine (SVM)-Ebene und der Konfiguration auf Cluster-Ebene.
+
+
+
+=== Storage Virtual Machine (SVM)
+
+Wie eine Virtual Machine, die auf einem Hypervisor ausgeführt wird, ist SVM eine logische Einheit, die physische Ressourcen abstrahiert. SVM enthält Daten-Volumes und ein oder mehrere LIFs, über die sie Daten an die Clients bereitstellen.
+
+
+
+=== Einheitliche und uneinheitliche Konfiguration
+
+* *Einheitlicher Hostzugriff* bedeutet, dass Hosts von beiden Standorten mit allen Pfaden zu Speicherclustern an beiden Standorten verbunden sind. Standortübergreifende Wege sind über die Distanz gestreckt.
+* *Uneinheitlicher Hostzugriff* bedeutet, dass Hosts an jedem Standort nur mit dem Cluster am selben Standort verbunden sind. Standortübergreifende Pfade und gestreckte Pfade sind nicht miteinander verbunden.
++
+
+NOTE: Jeder SnapMirror Active Sync Bereitstellung wird ein einheitlicher Host-Zugriff unterstützt. Ein nicht einheitlicher Host-Zugriff wird nur für symmetrische aktiv/aktiv-Implementierungen unterstützt.
+
+
+
+
+
+=== Virtual Machine File System (VMFS)
+
+VMFS ist ein geclustertes Filesystem, das speziell zum Speichern von VM-Dateien in VMware vSphere Umgebungen entwickelt wurde.
+
+
+
+=== Virtuelle Volumes (VVols)
+
+VVols bieten eine Abstraktion auf Volume-Ebene für den von einer Virtual Machine verwendeten Storage. Sie bietet mehrere Vorteile und eine Alternative zur Verwendung einer herkömmlichen LUN. Ein vVol Datastore wird normalerweise mit einer einzelnen LUN verknüpft, die als Container für die VVols fungiert.
+
+
+
+=== VM-Storage-Richtlinie
+
+VM-Storage-Richtlinien werden in vCenter Server unter Richtlinien und Profile erstellt. Für VVols erstellen Sie mithilfe von Regeln des NetApp VVols Storage-Typ-Providers eine Regelsammlung.
+
+
+
+=== VMware Live Site Recovery
+
+VMware Live Site Recovery bietet Business Continuity, Disaster Recovery, Standortmigration und unterbrechungsfreie Testfunktionen für virtuelle VMware-Umgebungen.
+
+
+
+=== VMware vSphere APIs für Storage Awareness (VASA)
+
+VASA besteht aus APIs, die Storage-Arrays für Management und Administration mit vCenter Server integrieren. Die Architektur basiert auf mehreren Komponenten, darunter den VASA Provider, der die Kommunikation zwischen VMware vSphere und den Storage-Systemen übernimmt.
+
+
+
+=== VMware vSphere Storage-APIs – Array-Integration (VAAI)
+
+VAAI ist ein Satz von APIs, der die Kommunikation zwischen VMware vSphere ESXi-Hosts und den Speichergeräten ermöglicht. Die APIs enthalten eine Reihe von primitiven Operationen, die von den Hosts zur Auslagerung von Speicheroperationen auf das Array verwendet werden. VAAI kann für Storage-intensive Aufgaben erhebliche Performance-Steigerungen bieten.
+
+
+
+=== VSphere Metro Storage-Cluster
+
+VSphere Metro Storage Cluster (vMSC) ist eine Technologie, die vSphere in einer Stretch-Cluster-Implementierung ermöglicht und unterstützt. VMSC Lösungen werden mit NetApp MetroCluster und SnapMirror Active Sync (ehemals SMBC) unterstützt. Diese Lösungen sorgen für verbesserte Business Continuity bei Domänenausfällen. Das Stabilitätsmodell basiert auf Ihren spezifischen Konfigurationsmöglichkeiten. Erfahren Sie mehr über https://core.vmware.com/resource/vmware-vsphere-metro-storage-cluster-vmsc["VMware vSphere Metro Storage-Cluster"].
+
+
+
+=== VVols Datastore
+
+Der VVols Datastore ist eine logische Datastore-Darstellung eines VVols-Containers, der von einem VASA Provider erstellt und gemanagt wird.
+
+
+
+=== Kein RPO
+
+RPO steht für den Recovery Point Objective. Dieser Wert ist das Maß des Datenverlusts, das während eines bestimmten Zeitraums als akzeptabel erachtet wird. Ein RPO von null bedeutet, dass kein Datenverlust akzeptabel ist.

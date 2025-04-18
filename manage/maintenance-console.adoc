@@ -1,0 +1,79 @@
+---
+permalink: manage/maintenance-console.html 
+sidebar: sidebar 
+keywords:  
+summary: Sie können Ihre Applikations-, System- und Netzwerkkonfigurationen mithilfe der Wartungskonsole der ONTAP Tools managen. Sie können Ihr Administratorkennwort und Ihr Wartungskennwort ändern. Außerdem können Sie Supportpakete generieren, verschiedene Protokollebenen festlegen, TLS-Konfigurationen anzeigen und verwalten und die Remote-Diagnose starten. 
+---
+= Überblick über die ONTAP Tools für die VMware vSphere Wartungskonsole
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können Ihre Applikations-, System- und Netzwerkkonfigurationen mithilfe der Wartungskonsole der ONTAP Tools managen. Sie können Ihr Administratorkennwort und Ihr Wartungskennwort ändern. Außerdem können Sie Supportpakete generieren, verschiedene Protokollebenen festlegen, TLS-Konfigurationen anzeigen und verwalten und die Remote-Diagnose starten.
+
+Sie sollten VMware Tools nach der Bereitstellung von ONTAP Tools für VMware vSphere installieren lassen, um auf die Wartungskonsole zuzugreifen. Sie sollten `maint` als Benutzernamen und Passwort verwenden, das Sie während der Bereitstellung konfiguriert haben, um sich bei der Wartungskonsole der ONTAP Tools anzumelden. Sie sollten *nano* zum Bearbeiten der Dateien in der Wartungs- oder Root-Login-Konsole verwenden.
+
+
+NOTE: Sie sollten ein Kennwort für den `diag` Benutzer festlegen, während Sie die Ferndiagnose aktivieren.
+
+Sie sollten die Registerkarte *Zusammenfassung* Ihrer bereitgestellten ONTAP-Tools für VMware vSphere verwenden, um auf die Wartungskonsole zuzugreifen. Wenn Sie auswählenimage:../media/launch-maintenance-console.gif["Wiedergabetaste"], wird die Wartungskonsole gestartet.
+
+|===
+
+
+| *Konsolenmenü* | *Optionen* 
+
+
+ a| 
+Anwendungskonfiguration
+ a| 
+. Zeigt eine Zusammenfassung des Serverstatus an
+. Ändern der PROTOKOLLEBENE für VASA Provider Services und SRA Services
+. Deaktivieren Sie AutoSupport
+. Aktualisieren Sie die AutoSupport-Proxy-URL
+
+
+
+
+ a| 
+Systemkonfiguration
+ a| 
+. Starten Sie die virtuelle Maschine neu
+. Virtuelle Maschine herunterfahren
+. Ändern Sie das Benutzerpasswort „Wartung“
+. Zeitzone ändern
+. Fügen Sie den neuen NTP-Server hinzu
+. Erhöhen der Größe der Jail-Festplatte (/jail)
+. Upgrade
+. Installation der VMware Tools
+
+
+
+
+ a| 
+Netzwerkkonfiguration
+ a| 
+. Zeigt die Einstellungen für die IP-Adresse an
+. Zeigen Sie die Einstellungen für die Suche nach Domain-Namen an
+. Ändern Sie die Einstellungen für die DNS-Suche
+. Statische Routen anzeigen
+. Ändern Sie statische Routen
+. Änderungen speichern
+. Ping an einen Host
+. Standardeinstellungen wiederherstellen
+
+
+
+
+ a| 
+Support und Diagnose
+ a| 
+. Zugriff auf die Diagnoseschale
+. Remote-Diagnosezugriff aktivieren
+. Geben Sie die vCenter-Anmeldeinformationen für das Backup an
+. Sichern Sie sich
+
+
+|===

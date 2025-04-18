@@ -1,0 +1,136 @@
+---
+permalink: deploy/pre-deploy-checks.html 
+sidebar: sidebar 
+keywords: ONTAP tools,Storage Replication Adapter 
+summary: Bevor Sie ONTAP Tools für VMware vSphere implementieren, sollten Sie mit den Speicherplatzanforderungen für das Implementierungspaket und einigen grundlegenden Host-Systemanforderungen vertraut sein. 
+---
+= Bevor Sie beginnen…​
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Stellen Sie sicher, dass die folgenden Anforderungen erfüllt sind, bevor Sie mit der Implementierung fortfahren:
+
+|===
+| Anforderungen | Ihr Status 
+
+
+| Die Version von vSphere, die Version von ONTAP und die Version des ESXi Hosts sind mit der Version der ONTP Tools kompatibel. | ❏ Ja ❏ Nein 
+
+
+| VCenter Server-Umgebung ist eingerichtet und konfiguriert | ❏ Ja ❏ Nein 
+
+
+| Browser-Cache wird gelöscht | ❏ Ja ❏ Nein 
+
+
+| Sie verfügen über die übergeordneten vCenter Server-Anmeldeinformationen | ❏ Ja ❏ Nein 
+
+
+| Sie verfügen über die Anmeldeinformationen für die vCenter Server-Instanz, mit der die ONTAP-Tools für VMware vSphere nach der Bereitstellung zur Registrierung verbunden werden | ❏ Ja ❏ Nein 
+
+
+| Der Domänenname, auf dem das Zertifikat ausgestellt wird, wird der virtuellen IP-Adresse in einer Multi-vCenter-Bereitstellung zugeordnet, in der benutzerdefinierte CA-Zertifikate erforderlich sind. | ❏ Ja ❏ Nein 
+
+
+| Sie haben die nslookup-Prüfung für den Domänennamen ausgeführt, um zu überprüfen, ob die Domäne auf die beabsichtigte IP-Adresse aufgelöst wird. | ❏ Ja ❏ Nein 
+
+
+| Das Zertifikat wird mit dem Domänennamen und der IP-Adresse des ONTAP Tools erstellt. | ❏ Ja ❏ Nein 
+
+
+| Die Anwendung der ONTAP-Tools und die internen Dienste sind vom vCenter-Server aus erreichbar. | ❏ Ja ❏ Nein 
+
+
+| Wenn Sie mandantenfähige SVMs verwenden, finden Sie auf jeder SVM eine LIF zum SVM-Management. | ❏ Ja ❏ Nein 
+|===
+
+
+== Arbeitsblatt für die Bereitstellung
+
+
+
+=== Für Single-Node-Implementierung
+
+Verwenden Sie das folgende Arbeitsblatt, um die erforderlichen Informationen für ONTAP-Tools für die Erstbereitstellung von VMware vSphere zu sammeln: Für ONTAP-Tools für die Erstbereitstellung von VMware vSphere:
+
+|===
+| Anforderungen | Ihr Wert 
+
+
+| IP-Adresse für die Anwendung ONTAP Tools |  
+
+
+| Node Interconnect IP-Adresse für die Kommunikation zwischen den Nodes |  
+
+
+| DNS-Hostname für den ersten Knoten |  
+
+
+| Primärer DNS-Server |  
+
+
+| Sekundärer DNS-Server |  
+
+
+| DNS-Suchdomäne |  
+
+
+| IPv4-Adresse für den primären Node |  
+
+
+| Subnetzmaske für die IPv4-Adresse |  
+
+
+| Standard-Gateway für die IPv4-Adresse |  
+
+
+| IPv6-Adresse (optional) |  
+
+
+| IPv6-Präfixlänge (optional) |  
+
+
+| Gateway für die IPv6-Adresse (optional) |  
+|===
+Erstellen Sie DNS-Einträge für alle oben genannten IP-Adressen. Bevor Sie Hostnamen zuweisen, ordnen Sie sie den freien IP-Adressen auf dem DNS zu. Alle IP-Adressen sollten sich im gleichen VLAN befinden, das für die Bereitstellung ausgewählt wurde.
+
+
+
+=== Für hochverfügbare Implementierungen
+
+Zusätzlich zu den Implementierungsanforderungen für einen Node benötigen Sie für die HA-Implementierung die folgenden Informationen:
+
+|===
+
+
+| Anforderungen | Ihr Wert 
+
+
+| Primärer DNS-Server |  
+
+
+| Sekundärer DNS-Server |  
+
+
+| DNS-Suchdomäne |  
+
+
+| DNS-Hostname für den zweiten Knoten |  
+
+
+| IP-Adresse für den zweiten Node |  
+
+
+| DNS-Hostname für den dritten Knoten |  
+
+
+| IP-Adresse für den dritten Knoten |  
+|===
+
+
+== Konfiguration der Netzwerk-Firewall
+
+Öffnen Sie die erforderlichen Ports für die IP-Adressen in Ihrer Netzwerk-Firewall. ONTAP Tools müssen in der Lage sein, dieses LIF über Port 443 zu erreichen. Aktuelle Informationen finden Sie unterlink:../deploy/prerequisites.html["Port-Anforderungen"].

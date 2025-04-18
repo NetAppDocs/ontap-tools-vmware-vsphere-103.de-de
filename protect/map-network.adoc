@@ -1,0 +1,42 @@
+---
+permalink: protect/map-network.html 
+sidebar: sidebar 
+keywords:  
+summary: Sie sollten Ihre Netzwerke am geschützten Standort und am Wiederherstellungsstandort zuordnen, um die Kommunikation zwischen ihnen zu ermöglichen. 
+---
+= Konfigurieren Sie die Netzwerkzuordnungen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie sollten Ihre Ressourcenzuordnungen wie VM-Netzwerke, ESXi-Hosts und Ordner an beiden Standorten konfigurieren, um die Zuordnung jeder Ressource vom geschützten Standort zur entsprechenden Ressource am Recovery-Standort zu ermöglichen.
+
+Sie sollten die folgenden Ressourcenkonfigurationen abschließen:
+
+* Netzwerkzuordnungen
+* Ordnerzuordnungen
+* Ressourcen-Zuordnungen
+* Platzhalter-Datenspeicher
+
+
+.Bevor Sie beginnen
+Sie sollten die geschützten und Recovery-Standorte verbunden haben.
+
+.Schritte
+. Melden Sie sich bei vCenter Server an und wählen Sie *Site Recovery* > *Sites*.
+. Wählen Sie Ihre geschützte Site aus und wählen Sie *Verwalten*.
+. Wählen Sie *Netzwerkzuordnungen* > *Neu* auf der Registerkarte Verwalten, um eine neue Netzwerkzuordnung zu erstellen.
+. Führen Sie im Assistenten zum Erstellen von Netzwerkzuordnungen die folgenden Schritte aus:
++
+.. Wählen Sie *Zuordnungen für Netzwerke mit übereinstimmenden Namen automatisch vorbereiten* aus und wählen Sie *Weiter* aus.
+.. Wählen Sie die gewünschten Rechenzentrumsobjekte für die geschützten und Recovery-Standorte aus und wählen Sie *Zuordnungen hinzufügen*.
+.. Wählen Sie *Weiter*, nachdem Zuordnungen erfolgreich erstellt wurden.
+.. Wählen Sie das zuvor verwendete Objekt aus, um eine umgekehrte Zuordnung zu erstellen, und wählen Sie dann *Fertig stellen*.
+
+
+
+
+.Ergebnis
+Auf der Seite Netzwerkzuordnungen werden die geschützten Standortressourcen und die Ressourcen des Recovery-Standorts angezeigt. Sie können die gleichen Schritte für andere Netzwerke in Ihrer Umgebung befolgen.

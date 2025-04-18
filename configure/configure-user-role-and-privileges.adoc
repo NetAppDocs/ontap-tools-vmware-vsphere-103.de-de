@@ -1,0 +1,451 @@
+---
+permalink: configure/configure-user-role-and-privileges.html 
+sidebar: sidebar 
+keywords: user roles 
+summary: Sie können neue Benutzerrollen für das Management von Storage-Back-Ends mit der JSON-Datei konfigurieren, die in den ONTAP Tools für VMware vSphere und ONTAP System Manager zur Verfügung gestellt wird. 
+---
+= Konfigurieren Sie ONTAP-Benutzerrollen und -Berechtigungen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können neue Benutzerrollen und -Berechtigungen für das Management von Storage-Back-Ends mit der JSON-Datei konfigurieren, die mit den ONTAP Tools für VMware vSphere und ONTAP System Manager bereitgestellt wird.
+
+.Bevor Sie beginnen
+* Sie sollten die Datei mit den ONTAP-Berechtigungen von den ONTAP-Tools für VMware vSphere unter Verwendung von _\https://<loadbalancerIP>:8443/Virtualization/user-Privileges/users_roles.zip_ heruntergeladen haben.
+* Sie sollten die ONTAP Privileges-Datei von ONTAP-Tools heruntergeladen haben `\https://<loadbalancerIP>:8443/virtualization/user-privileges/users_roles.zip`.
++
+
+NOTE: Benutzer können auf Cluster-Ebene oder direkt auf Storage Virtual Machines (SVMs)-Ebene erstellt werden. Sie können auch Benutzer erstellen, ohne die Datei user_roles.json zu verwenden. Falls dies der Fall ist, müssen Sie über einen Mindestsatz an Berechtigungen auf SVM-Ebene verfügen.
+
+* Sie sollten sich mit Administratorrechten für das Speicher-Back-End angemeldet haben.
+
+
+.Schritte
+. Extrahieren Sie die heruntergeladene Datei _\https://<loadbalancerIP>:8443/Virtualization/user-Privileges/users_roles.zip_.
+. Sie können über die Cluster-Management-IP-Adresse des Clusters auf ONTAP System Manager zugreifen.
+. Melden Sie sich mit dem Admin-Privileges beim Cluster an. So konfigurieren Sie einen Benutzer:
++
+.. Um Cluster-ONTAP-Tools zu konfigurieren, wählen Sie *Cluster* > *Einstellungen* > *Benutzer und Rollen* aus.
+.. Um den Benutzer der SVM-ONTAP-Tools zu konfigurieren, wählen Sie den Bereich *Speicher-SVM* > *Einstellungen* > *Benutzer und Rollen* aus.
+.. Wählen Sie unter Benutzer * Hinzufügen *.
+.. Wählen Sie im Dialogfeld * Benutzer hinzufügen* die Option *Virtualisierungsprodukte* aus.
+.. *Browse*, um die JSON-Datei für ONTAP-Berechtigungen auszuwählen und hochzuladen.
++
+Das Produktfeld wird automatisch ausgefüllt.
+
+.. Wählen Sie die gewünschte Funktion aus dem Dropdown-Menü „Produktfähigkeit“ aus.
++
+Das Feld *Rolle* wird basierend auf der ausgewählten Produktfähigkeit automatisch ausgefüllt.
+
+.. Geben Sie den erforderlichen Benutzernamen und das erforderliche Passwort ein.
+.. Wählen Sie die für den Benutzer erforderliche Privileges (Ermittlung, Speicher erstellen, Speicher ändern, Speicher zerstören, NAS/SAN-Rolle) aus, und wählen Sie dann *Hinzufügen* aus.
+
+
+
+
+Die neue Rolle und der neue Benutzer werden hinzugefügt, und Sie können die detaillierten Berechtigungen unter der von Ihnen konfigurierten Rolle sehen.
+
+
+
+== Anforderungen für die SVM-Aggregatzuordnung
+
+Um SVM-Benutzeranmeldeinformationen für die Bereitstellung von Datastores zu verwenden, erstellt das interne ONTAP-Tool für VMware vSphere Volumes auf dem Aggregat, das in der POST-API für Datastores angegeben ist. Die ONTAP ermöglicht nicht die Erstellung von Volumes auf Aggregaten ohne Zuweisung auf einer SVM mit SVM-Benutzeranmeldeinformationen. Um das zu lösen, müssen Sie die SVMs wie hier beschrieben mit den Aggregaten zuordnen. Dazu verwenden Sie entweder die ONTAP REST-API oder die CLI.
+
+REST-API:
+
+[listing]
+----
+PATCH "/api/svm/svms/f16f0935-5281-11e8-b94d-005056b46485" '{"aggregates":{"name":["aggr1","aggr2","aggr3"]}}'
+----
+ONTAP-CLI:
+
+[listing]
+----
+sti115_vsim_ucs630f_aggr1 vserver show-aggregates                                        AvailableVserver        Aggregate      State         Size Type    SnapLock Type-------------- -------------- ------- ---------- ------- --------------svm_test       sti115_vsim_ucs630f_aggr1                               online     10.11GB vmdisk  non-snaplock
+----
+
+
+== Erstellen Sie ONTAP-Benutzer und -Rolle manuell
+
+Befolgen Sie die Anweisungen in diesem Abschnitt, um den Benutzer und die Rollen manuell zu erstellen, ohne die JSON-Datei zu verwenden.
+
+. Sie können über die Cluster-Management-IP-Adresse des Clusters auf ONTAP System Manager zugreifen.
+. Melden Sie sich mit dem Admin-Privileges beim Cluster an.
++
+.. Um Cluster-ONTAP-Tools-Rollen zu konfigurieren, wählen Sie *Cluster* > *Einstellungen* > *Benutzer und Rollen* aus.
+.. Um die Rollen der Cluster-SVM-ONTAP-Tools zu konfigurieren, wählen Sie *Speicher-SVM* > *Einstellungen* > *Benutzer und Rollen* aus
+
+
+. Rollen Erstellen:
++
+.. Wählen Sie *Hinzufügen* unter *Rollen* Tabelle.
+.. Geben Sie die Details *Rollenname* und *Rollenattribute* ein.
++
+Fügen Sie den *REST API Path* und den entsprechenden Zugriff aus dem Drop-Down-Menü hinzu.
+
+.. Fügen Sie alle benötigten APIs hinzu und speichern Sie die Änderungen.
+
+
+. Benutzer Erstellen:
++
+.. Wählen Sie *Hinzufügen* unter *Benutzer* Tabelle.
+.. Wählen Sie im Dialogfeld *Benutzer hinzufügen* *System Manager* aus.
+.. Geben Sie den Benutzernamen * ein.
+.. Wählen Sie *Rolle* aus den Optionen aus, die im Schritt *Rollen erstellen* oben erstellt wurden.
+.. Geben Sie die Anwendungen ein, auf die Zugriff gewährt werden soll, und geben Sie die Authentifizierungsmethode ein. ONTAPI und HTTP sind die erforderlichen Anwendungen, und der Authentifizierungstyp ist *Password*.
+.. Legen Sie das *Passwort für den Benutzer* und *Speichern* für den Benutzer fest.
+
+
+
+
+
+
+=== Liste der Mindestberechtigungen, die für einen nicht-Administrator-Cluster mit globalem Umfang erforderlich sind
+
+In diesem Abschnitt werden die Mindestberechtigungen aufgeführt, die für Benutzer mit globalem Clusterbereich, die ohne Verwendung der JSON-Datei des Benutzers erstellt wurden, erforderlich sind. Wenn Sie einen Cluster mit lokalem Umfang hinzufügen, empfehlen wir, zum Erstellen der Benutzer die JSON-Datei zu verwenden, da für ONTAP Tools für VMware vSphere mehr als nur die Leseberechtigungen für das Provisioning auf ONTAP erforderlich sind.
+
+Verwenden von APIs:
+
+|===
+
+
+| API | Zugangsstufe | Verwendet für 
+
+
+| /API/Cluster | Schreibgeschützt | Erkennung Der Clusterkonfiguration 
+
+
+| /API/Cluster/Lizenzierung/Lizenzen | Schreibgeschützt | Lizenzprüfung für protokollspezifische Lizenzen 
+
+
+| /API/Cluster/Nodes | Schreibgeschützt | Erkennung des Plattformtyps 
+
+
+| /API/Sicherheit/Konten | Schreibgeschützt | Ermittlung Von Berechtigungen 
+
+
+| /API/Sicherheit/Funktionen | Schreibgeschützt | Ermittlung Von Berechtigungen 
+
+
+| /API/Storage/Aggregate | Schreibgeschützt | Speicherplatzüberprüfung von Aggregaten während der Bereitstellung von Datastores/Volumes 
+
+
+| /API/Storage/Cluster | Schreibgeschützt | Um Speicherplatz auf Cluster-Ebene und Effizienzdaten zu erhalten 
+
+
+| /API/Storage/Festplatten | Schreibgeschützt | Um die in einem Aggregat zugeordneten Festplatten zu erhalten 
+
+
+| /API/Storage/qos/Richtlinien | Lesen/Erstellen/Ändern | QoS- und VM-Richtlinienmanagement 
+
+
+| /API/svm/svms | Schreibgeschützt | Um die SVM-Konfiguration für den Fall zu erhalten, dass das Cluster lokal hinzugefügt wird. 
+
+
+| /API/Netzwerk/ip/Schnittstellen | Schreibgeschützt | Storage Back-end hinzufügen: Zur Identifizierung des Management-LIF-Umfangs ist Cluster/SVM 
+|===
+
+
+=== Erstellen Sie ONTAP Tools für VMware vSphere ONTAP API-basierten Cluster Scoped User
+
+
+NOTE: Privileges müssen erkannt, erstellt, geändert und zerstört werden, damit bei Ausfällen in Datastores PATCHVORGÄNGE und automatische Rollbacks durchgeführt werden können. Das Fehlen dieser Privileges führt zu Unterbrechungen des Workflows und Problemen bei der Bereinigung.
+
+Erstellen von ONTAP-Tools für VMware vSphere ONTAP API-basierte Benutzer mit Erkennung, Erstellung von Speicher, Änderung von Speicher, Zerstörung von Speicher Privileges ermöglicht die Initiierung von Ermittlungen und Management von ONTAP-Tools Workflows.
+
+Führen Sie die folgenden Befehle aus, um einen Cluster-scoped-Benutzer mit allen oben genannten Privileges zu erstellen:
+
+[listing]
+----
+
+security login rest-role create -role <role-name> -api /api/application/consistency-groups -access all
+
+security login rest-role create -role <role-name> -api /api/private/cli/snapmirror -access all
+
+security login rest-role create -role <role-name> -api /api/protocols/nfs/export-policies -access all
+
+security login rest-role create -role <role-name> -api /api/protocols/nvme/subsystem-maps -access all
+
+security login rest-role create -role <role-name> -api /api/protocols/nvme/subsystems -access all
+
+security login rest-role create -role <role-name> -api /api/protocols/san/igroups -access all
+
+security login rest-role create -role <role-name> -api /api/protocols/san/lun-maps -access all
+
+security login rest-role create -role <role-name> -api /api/protocols/san/vvol-bindings -access all
+
+security login rest-role create -role <role-name> -api /api/snapmirror/relationships -access all
+
+security login rest-role create -role <role-name> -api /api/storage/volumes -access all
+
+security login rest-role create -role <role-name> -api "/api/storage/volumes/*/snapshots" -access all
+
+security login rest-role create -role <role-name> -api /api/storage/luns -access all
+
+security login rest-role create -role <role-name> -api /api/storage/namespaces -access all
+
+security login rest-role create -role <role-name> -api /api/storage/qos/policies -access all
+
+security login rest-role create -role <role-name> -api /api/cluster/schedules -access read_create
+
+security login rest-role create -role <role-name> -api /api/snapmirror/policies -access read_create
+
+security login rest-role create -role <role-name> -api /api/storage/file/clone -access read_create
+
+security login rest-role create -role <role-name> -api /api/storage/file/copy -access read_create
+
+security login rest-role create -role <role-name> -api /api/support/ems/application-logs -access read_create
+
+security login rest-role create -role <role-name> -api /api/protocols/nfs/services -access read_modify
+
+security login rest-role create -role <role-name> -api /api/cluster -access readonly
+
+security login rest-role create -role <role-name> -api /api/cluster/jobs -access readonly
+
+security login rest-role create -role <role-name> -api /api/cluster/licensing/licenses -access readonly
+
+security login rest-role create -role <role-name> -api /api/cluster/nodes -access readonly
+
+security login rest-role create -role <role-name> -api /api/cluster/peers -access readonly
+
+security login rest-role create -role <role-name> -api /api/name-services/name-mappings -access readonly
+
+security login rest-role create -role <role-name> -api /api/network/ethernet/ports -access readonly
+
+security login rest-role create -role <role-name> -api /api/network/fc/interfaces -access readonly
+
+security login rest-role create -role <role-name> -api /api/network/fc/logins -access readonly
+
+security login rest-role create -role <role-name> -api /api/network/fc/ports -access readonly
+
+security login rest-role create -role <role-name> -api /api/network/ip/interfaces -access readonly
+
+security login rest-role create -role <role-name> -api /api/protocols/nfs/kerberos/interfaces -access readonly
+
+security login rest-role create -role <role-name> -api /api/protocols/nvme/interfaces -access readonly
+
+security login rest-role create -role <role-name> -api /api/protocols/san/fcp/services -access readonly
+
+security login rest-role create -role <role-name> -api /api/protocols/san/iscsi/services -access readonly
+
+security login rest-role create -role <role-name> -api /api/security/accounts -access readonly
+
+security login rest-role create -role <role-name> -api /api/security/roles -access readonly
+
+security login rest-role create -role <role-name> -api /api/storage/aggregates -access readonly
+
+security login rest-role create -role <role-name> -api /api/storage/cluster -access readonly
+
+security login rest-role create -role <role-name> -api /api/storage/disks -access readonly
+
+security login rest-role create -role <role-name> -api /api/storage/qtrees -access readonly
+
+security login rest-role create -role <role-name> -api /api/storage/quota/reports -access readonly
+
+security login rest-role create -role <role-name> -api /api/storage/snapshot-policies -access readonly
+
+security login rest-role create -role <role-name> -api /api/svm/peers -access readonly
+
+security login rest-role create -role <role-name> -api /api/svm/svms -access readonly
+
+----
+Außerdem führen Sie für ONTAP-Versionen 9.16.0 und höher den folgenden Befehl aus:
+
+[listing]
+----
+security login rest-role create -role <role-name> -api /api/storage/storage-units -access all
+----
+
+
+=== ONTAP Tools für VMware vSphere ONTAP API-basierten SVM-Scoped User erstellen
+
+Führen Sie die folgenden Befehle aus, um einen für den SVM-Scoped-Benutzer mit allen Privileges zu erstellen:
+
+[listing]
+----
+security login rest-role create -role <role-name> -api /api/application/consistency-groups -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/private/cli/snapmirror -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/protocols/nfs/export-policies -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/protocols/nvme/subsystem-maps -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/protocols/nvme/subsystems -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/protocols/san/igroups -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/protocols/san/lun-maps -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/protocols/san/vvol-bindings -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/snapmirror/relationships -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/storage/volumes -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api "/api/storage/volumes/*/snapshots" -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/storage/luns -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/storage/namespaces -access all -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/cluster/schedules -access read_create -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/snapmirror/policies -access read_create -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/storage/file/clone -access read_create -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/storage/file/copy -access read_create -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/support/ems/application-logs -access read_create -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/protocols/nfs/services -access read_modify -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/cluster -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/cluster/jobs -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/cluster/peers -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/name-services/name-mappings -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/network/ethernet/ports -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/network/fc/interfaces -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/network/fc/logins -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/network/ip/interfaces -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/protocols/nfs/kerberos/interfaces -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/protocols/nvme/interfaces -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/protocols/san/fcp/services -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/protocols/san/iscsi/services -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/security/accounts -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/security/roles -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/storage/qtrees -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/storage/quota/reports -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/storage/snapshot-policies -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/svm/peers -access readonly -vserver <vserver-name>
+
+security login rest-role create -role <role-name> -api /api/svm/svms -access readonly -vserver <vserver-name>
+----
+Außerdem führen Sie für ONTAP-Versionen 9.16.0 und höher den folgenden Befehl aus:
+
+[listing]
+----
+security login rest-role create -role <role-name> -api /api/storage/storage-units -access all -vserver <vserver-name>
+----
+Um einen neuen API-basierten Benutzer mit den oben erstellten API-basierten Rollen zu erstellen, führen Sie den folgenden Befehl aus:
+
+[listing]
+----
+security login create -user-or-group-name <user-name> -application http -authentication-method password -role <role-name> -vserver <cluster-or-vserver-name>
+----
+Beispiel:
+
+[listing]
+----
+security login create -user-or-group-name testvpsraall -application http -authentication-method password -role OTV_10_VP_SRA_Discovery_Create_Modify_Destroy -vserver C1_sti160-cluster_
+----
+Um das Konto zu entsperren, führen Sie den folgenden Befehl aus, um den Zugriff auf die Managementoberfläche zu aktivieren:
+
+[listing]
+----
+security login unlock -user <user-name> -vserver <cluster-or-vserver-name>
+----
+Beispiel:
+
+[listing]
+----
+security login unlock -username testvpsraall -vserver C1_sti160-cluster
+----
+
+
+== Upgrade von ONTAP Tools für VMware vSphere 10.1 Benutzer auf 10.3 Benutzer
+
+Wenn es sich bei den ONTAP-Tools für VMware vSphere 10.1-Benutzer um einen Cluster-scoped-Benutzer handelt, der mit der json-Datei erstellt wurde, führen Sie die folgenden Befehle auf der ONTAP-CLI mit dem Admin-Benutzer aus, um ein Upgrade auf Version 10.3 durchzuführen.
+
+Produktfunktionen:
+
+* VSC
+* VSC und VASA Provider
+* VSC und SRA
+* VSC, VASA Provider und SRA.
+
+
+Cluster-Privileges:
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Namespace show“ -Access all_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme subsystem show“ -Access all_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem Host show“ -Access all_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem map show“ -Access all_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme show-Interface“ -Access read_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem Host add“ -Access all_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem map add“ -Access all_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Namespace delete“ -Access all_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme subsystem delete“ -Access all_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem Host remove“ -Access all_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem map remove“ -Access all_
+
+Wenn es sich bei den ONTAP Tools für VMware vSphere 10.1 Benutzer um einen im SVM-Umfang enthaltenen Benutzer handelt, der mit der json-Datei erstellt wurde, führen Sie die folgenden Befehle an der ONTAP-CLI aus, wobei Sie den Admin-Benutzer zum Upgrade auf Version 10.3 verwenden.
+
+SVM-Privileges:
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Namespace show“ -Access all -vserver <vserver-name>_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme subsystem show“ -Access all -vserver <vserver-name>_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem Host show“ -Access all -vserver <vserver-name>_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem map show“ -Access all -vserver <vserver-name>_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme show-Interface“ -Access read -vserver <vserver-name>_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem Host add“ -Access all -vserver <vserver-name>_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem map add“ -Access all -vserver <vserver-name>_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Namespace delete“ -Access all -vserver <vserver-name>_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme subsystem delete“ -Access all -vserver <vserver-name>_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem Host remove“ -Access all -vserver <vserver-name>_
+
+_Security Login role create -role <existing-role-name> -cmddirname „vserver nvme Subsystem map remove“ -Access all -vserver <vserver-name>_
+
+Durch Hinzufügen des Befehls _vserver nvme Namespace show_ und _vserver nvme-Subsystem show_ zu der vorhandenen Rolle werden die folgenden Befehle hinzugefügt.
+
+[listing]
+----
+vserver nvme namespace create
+
+vserver nvme namespace modify
+
+vserver nvme subsystem create
+
+vserver nvme subsystem modify
+
+----

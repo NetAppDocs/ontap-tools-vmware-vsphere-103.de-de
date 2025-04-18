@@ -1,0 +1,42 @@
+---
+permalink: manage/collect-the-log-files.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Sie können Protokolldateien für ONTAP-Tools für VMware vSphere über die in den ONTAP-Tools für die grafische Benutzeroberfläche von VMware vSphere \(GUI\) verfügbaren Optionen sammeln. Der technische Support fordert Sie möglicherweise auf, die Protokolldateien zu sammeln, damit Sie Probleme beheben können.' 
+---
+= Sammeln Sie die Protokolldateien
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können Protokolldateien für ONTAP-Tools für VMware vSphere über die in der Benutzeroberfläche von ONTAP Tools Manager verfügbaren Optionen sammeln. Der technische Support fordert Sie möglicherweise auf, die Protokolldateien zu sammeln, damit Sie Probleme beheben können.
+
+
+NOTE: Die Generierung von Protokollen über den ONTAP-Tools-Manager umfasst alle Protokolle für alle vCenter-Serverinstanzen. Die Generierung von Protokollen über die vCenter-Client-Benutzeroberfläche ist für den ausgewählten vCenter-Server vorgesehen.
+
+.Schritte
+. Starten Sie den ONTAP Tools Manager über einen Webbrowser: `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
+. Melden Sie sich mit den ONTAP Tools für VMware vSphere Administrator-Anmeldeinformationen an, die Sie während der Implementierung angegeben haben.
+. Wählen Sie in der Seitenleiste *Log Bundles* aus.
++
+Dieser Vorgang kann mehrere Minuten dauern.
+
+. Wählen Sie *Generate*, um die Protokolldateien zu generieren.
+. Geben Sie die Bezeichnung für das Log Bundle ein und wählen Sie *Generate*.
++
+Laden Sie die Datei tar.gz herunter, und senden Sie sie an den technischen Support.
+
+
+
+Führen Sie die folgenden Schritte aus, um Protokollbündel über die vCenter Client-Benutzeroberfläche zu generieren:
+
+.Schritte
+. Melden Sie sich beim vSphere-Client an
+. Gehen Sie auf der vSphere Client-Homepage zu *Support* > *Log Bundle* > *Generate*.
+. Geben Sie das Protokollbündel-Label an, und generieren Sie das Protokollbündel. Sie können die Download-Option sehen, wenn die Dateien generiert werden. Das Herunterladen kann einige Zeit in Anspruch nehmen.
+
+
+
+NOTE: Das erzeugte Log-Bundle ersetzt das Log-Bundle, das innerhalb der letzten 3 Tage oder 72 Stunden erzeugt wurde.

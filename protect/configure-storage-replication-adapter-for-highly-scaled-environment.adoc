@@ -1,0 +1,68 @@
+---
+permalink: protect/configure-storage-replication-adapter-for-highly-scaled-environment.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Sie sollten die Storage-Timeout-Intervalle gemäß den empfohlenen Einstellungen für Storage Replication Adapter\(SRA \) konfigurieren, um in stark skalierten Umgebungen eine optimale Leistung zu erzielen.' 
+---
+= Konfiguration von SRA für hochskalierte Umgebungen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie sollten die Storage-Timeout-Intervalle gemäß den empfohlenen Einstellungen für Storage Replication Adapter (SRA) so konfigurieren, dass sie in stark skalierten Umgebungen optimal funktionieren.
+
+
+
+== Einstellungen für Speicheranbieter
+
+Sie sollten die folgenden Zeitüberschreitungswerte auf VMware Live Site Recovery für eine skalierte Umgebung festlegen:
+
+|===
+
+
+| *Erweiterte Einstellungen* | *Timeout-Werte* 
+
+
+ a| 
+`StorageProvider.resignatureTimeout`
+ a| 
+Erhöhen Sie den Wert der Einstellung von 900 Sekunden auf 12000 Sekunden.
+
+
+
+ a| 
+`storageProvider.hostRescanDelaySec`
+ a| 
+60
+
+
+
+ a| 
+`storageProvider.hostRescanRepeatCnt`
+ a| 
+20
+
+
+
+ a| 
+`storageProvider.hostRescanTimeoutSec`
+ a| 
+Legen Sie einen hohen Wert fest (z. B. 99999).
+
+|===
+Sie sollten auch die `StorageProvider.autoResignatureMode` Option aktivieren.
+
+Weitere Informationen zum Ändern von Speicheranbietereinstellungen finden Sie unter https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery/live-site-recovery/9-0/how-do-i-protect-my-environment/advanced-srm-configuration/reconfigure-srm-settings/change-storage-provider-settings.html["Ändern Sie Die Einstellungen Des Speicheranbieters"].
+
+
+
+== Speichereinstellungen
+
+Wenn Sie eine Zeitüberschreitung drücken, erhöhen Sie die Werte von `storage.commandTimeout` und `storage.maxConcurrentCommandCnt` auf einen höheren Wert.
+
+
+NOTE: Das angegebene Zeitüberschreitungsintervall ist der Höchstwert. Sie müssen nicht warten, bis die maximale Zeitüberschreitung erreicht ist. Die meisten Befehle sind innerhalb des festgelegten maximalen Timeout-Intervalls abgeschlossen.
+
+Informationen zum Ändern der SAN-Provider-Einstellungen finden Sie unter https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery/live-site-recovery/9-0/how-do-i-protect-my-environment/advanced-srm-configuration/reconfigure-srm-settings/change-storage-settings.html["Ändern Sie Die Speichereinstellungen"].

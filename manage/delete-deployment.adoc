@@ -1,0 +1,31 @@
+---
+permalink: manage/delete-deployment.html 
+sidebar: sidebar 
+keywords: ONTAP tools,Storage Replication Adapter 
+summary: Nachdem Sie ONTAP Tools für die VMware vSphere Implementierung gelöscht haben, sollten Sie die während der Implementierung erstellten FlexVol Volumes bereinigen. Wenn Sie einen dedizierten ONTAP Cluster für Implementierungen verwendet haben, sollten Sie die FlexVols bereinigen, da die Implementierung viele FlexVols erstellt, die ungenutzt bleiben, was die Performance senkt. 
+---
+= Entfernen Sie FlexVol Volumes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Wenn Sie einen dedizierten ONTAP Cluster für ONTAP Tools zur VMware Implementierung verwenden, werden viele nicht genutzte FlexVol Volumes erstellt. Nach dem Entfernen von ONTAP-Tools für VMware vSphere sollten Sie die FlexVol-Volumes entfernen, um mögliche Performance-Auswirkungen zu vermeiden.
+
+.Schritte
+. Bestimmen Sie die ONTAP-Tools für den Bereitstellungstyp von VMware vSphere von der VM des primären Node.
++
+_CAT /opt/netapp/meta/ansible_vars.yaml grep -i Protocol_
+
++
+Wenn es sich um eine iSCSI-Bereitstellung handelt, müssen auch Initiatorgruppen gelöscht werden.
+
+. Holen Sie sich die Liste der FlexVol Volumes.
++
+_Kubectl Beschreiben Sie dauerhafte Volumina.Name AWK -F'=' '{Print 2}'_
+
+. Entfernen Sie die VMs vom vCenter Server. Siehe https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-virtual-machine-administration-guide-8-0/managing-virtual-machinesvsphere-vm-admin/adding-and-removing-virtual-machinesvsphere-vm-admin.html#GUID-376174FE-F936-4BE4-B8C2-48EED42F110B-en["Entfernen Sie VMs und VM-Vorlagen und registrieren Sie sie erneut"].
+. Löschen Sie FlexVol Volumes aus dem ONTAP System Manager. Siehe https://docs.netapp.com/us-en/ontap/volumes/delete-flexvol-task.html["Löschen Sie ein FlexVol Volume"]. Geben Sie zum Löschen eines Volumes im CLI-Befehl den genauen Namen der FlexVol Volumes an.
+. Löschen Sie im Falle einer iSCSI-Bereitstellung SAN-Initiatorgruppen aus dem ONTAP-Speichersystem. Siehe https://docs.netapp.com/us-en/ontap/san-admin/manage-san-initiators-task.html["Zeigen Sie SAN-Initiatoren und -Initiatorgruppen an und verwalten Sie sie"].
+

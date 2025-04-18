@@ -1,0 +1,74 @@
+---
+permalink: manage/enable-backup.html 
+sidebar: sidebar 
+keywords:  
+summary: Da die ONTAP Tools für VMware vSphere 10.3 die dynamische Storage-bereitstellung verwenden, können Sie kein RPO mehr erzielen. Sie können jedoch eine RPO von nahezu null erzielen. 
+---
+= Erstellen Sie ein Backup und stellen Sie das Setup wieder her
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Da die ONTAP Tools für VMware vSphere 10.3 die dynamische Storage-bereitstellung verwenden, können Sie keine sofort erstellte RPOs mehr erreichen. Sie können jedoch eine RPO von nahezu null erzielen. Um ein RPO von nahezu null zu erzielen, müssen Sie ein Backup des Setups erstellen und es auf einer neuen Virtual Machine wiederherstellen.
+
+
+
+== Erstellen Sie ein Backup, und laden Sie die Sicherungsdatei herunter
+
+.Schritte
+. Öffnen Sie vom vCenter Server aus die Wartungskonsole.
+. Melden Sie sich als Wartungbenutzer an.
+. Geben Sie ein `4`, um *Support und Diagnose* auszuwählen.
+. Geben Sie ein `3`, um die Option *Systemsicherung aktivieren* auszuwählen.
+. Geben Sie im Fall von nicht-HA die vCenter-Anmeldeinformationen ein, auf denen die virtuelle Maschine der ONTAP-Tools bereitgestellt wird.
+. Geben Sie den Wert für die Sicherungshäufigkeit zwischen 5-60 Minuten ein.
+. Drücken Sie *Enter*
++
+Dadurch wird das Backup erstellt und das Backup in regelmäßigen Abständen auf den Datastore der virtuellen Maschine übertragen.
+
+. Um auf das Backup zuzugreifen, navigieren Sie zum Abschnitt Speicher, und wählen Sie den Datastore der virtuellen Maschine aus
+. Wählen Sie den Abschnitt *Dateien* aus.
++
+Im Dateibereich sehen Sie das Verzeichnis. Der Name des Verzeichnisses wird die IP-Adresse des ONTAP Tools sein, wobei die Punkte (.) durch Unterstriche ersetzt werden, die mit _Backup_ suffixiert werden.
+
+. Um weitere Informationen zur Datensicherung zu erhalten, laden Sie die Datei backup_info.txt unter *Dateien* > *Download* herunter.
+
+
+
+
+== Recovery
+
+Um das Setup wiederherzustellen, schalten Sie die vorhandene virtuelle Maschine aus und stellen Sie eine neue virtuelle Maschine mithilfe der OVA bereit, die bei der ersten Bereitstellung verwendet wurde.
+
+Sie müssen für die neue Virtual Machine dieselbe IP-Adresse (Load Balancer-IP) der ONTAP-Tools verwenden. Außerdem muss die Systemkonfiguration – z. B. aktivierte Services, Node-Größe und HA-Modus – mit der ursprünglichen Bereitstellung identisch sein.
+
+Führen Sie die folgenden Schritte aus, um das Setup aus der Sicherungsdatei wiederherzustellen.
+
+. Öffnen Sie vom vCenter Server aus die Wartungskonsole.
+. Melden Sie sich als Wartungbenutzer an.
+. Geben Sie ein `4`, um *Support und Diagnose* auszuwählen.
+. Geben Sie ein `2`, um die Option *Ferndiagnosezugriff aktivieren* auszuwählen, und erstellen Sie ein neues Passwort für den Diagnosezugriff.
+. Wählen Sie eine beliebige Sicherung aus dem heruntergeladenen Verzeichnis aus. Der Name der letzten Sicherungsdatei wird in der Datei _Backup_info.txt_ gespeichert.
+. Führen Sie den folgenden Befehl aus, um das Backup auf die neue virtuelle Maschine zu kopieren, und geben Sie bei der entsprechenden Aufforderung das Diagnosepasswort ein.
++
+[listing]
+----
+scp <Backup_X.tar.enc> diag@<node_ip>:/home/diag/system_recovery.tar.enc
+----
++
+
+NOTE: Ändern Sie nicht den im Befehl erwähnten Zielpfad und Dateinamen (/Home/diag/System_Recovery.tar.enc).
+
+. Melden Sie sich nach dem Kopieren der Sicherungsdatei bei der Diagnoseshell an, und führen Sie den folgenden Befehl aus:
++
+[listing]
+----
+sudo perl /home/maint/scripts/post-deploy-upgrade.pl -recovery
+----
++
+Die Protokolle werden in der Datei _/var/log/post-deploy-Upgrade.log_ aufgezeichnet.
+
+. Nach der erfolgreichen Recovery werden Services und vCenter Objekte wiederhergestellt.
+

@@ -1,0 +1,22 @@
+---
+permalink: manage/update-proxyurl.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Sie können Protokolldateien für ONTAP-Tools für VMware vSphere über die in den ONTAP-Tools für die grafische Benutzeroberfläche von VMware vSphere \(GUI\) verfügbaren Optionen sammeln. Der technische Support fordert Sie möglicherweise auf, die Protokolldateien zu sammeln, damit Sie Probleme beheben können.' 
+---
+= Aktualisieren Sie die AutoSupport-Proxy-URL
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Aktualisieren Sie die AutoSupport-Proxy-URL, um sicherzustellen, dass die AutoSupport-Funktion in Szenarien funktioniert, in denen ein Proxyserver für die Netzwerkzugriffskontrolle oder Sicherheitsmaßnahmen verwendet wird. Damit können die AutoSupport-Daten über den entsprechenden Proxy geleitet werden, um eine sichere Übertragung und Compliance zu ermöglichen.
+
+.Schritte
+. Öffnen Sie vom vCenter Server aus die Wartungskonsole.
+. Melden Sie sich als Wartungbenutzer an.
+. Geben Sie 1 ein, um *Anwendungskonfiguration* auszuwählen.
+. Geben Sie 4 ein, um *AutoSupport-Proxy-URL aktualisieren* auszuwählen.
+. Geben Sie die Proxy-URL ein.
+

@@ -1,0 +1,180 @@
+---
+permalink: upgrade/upgrade-ontap-tools.html 
+sidebar: sidebar 
+keywords: upgrade 
+summary: Upgrade wird sowohl für HA-Implementierungen als auch für Implementierungen ohne HA unterstützt. 
+---
+= Upgrade von ONTAP Tools für VMware vSphere 10.x auf 10.3
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Das Upgrade wird sowohl für HA-Implementierungen als auch für Implementierungen ohne HA unterstützt. Unterstützte Upgrade-Pfade:
+
+|===
+
+
+| Über ONTAP Tools für die Konfiguration von VMware vSphere 10.1 und 10.2 | Zu ONTAP Tools für die Konfiguration von VMware vSphere 10.3 
+
+
+| Nicht-HA klein | Non-HA und Advanced Small 
+
+
+| Non-HA Medium | Non-HA und Advanced Medium 
+
+
+| Advanced Small | Non-HA und Advanced Small 
+
+
+| Modernes Medium | Non-HA und Advanced Medium 
+
+
+| HA klein | HA klein 
+
+
+| HA mittel | HA mittel 
+
+
+| HA groß | HA groß 
+|===
+
+NOTE: Es werden Upgrades von ONTAP Tools für VMware vSphere 10.1 und 10.2 auf 10.3 unterstützt. Direkte Upgrades von ONTAP Tools 10.0 auf 10.3 werden nicht unterstützt.
+
+*Bevor Sie beginnen*
+
+Wenn Sie ein Upgrade ohne HA durchführen, schalten Sie die ONTAP Tools-VM aus. Schalten Sie für ein HA-Upgrade den ersten Node aus, bevor Sie die folgenden Änderungen an den VM-Einstellungen (Virtual Machine) vornehmen.
+
+* Fügen Sie jedem Node eine zusätzliche 100-GB-Festplatte hinzu, da die Servicedaten lokal auf der VM gespeichert werden.
+* Ändern Sie die CPU und den Arbeitsspeicher der ausgeschalteten VM entsprechend Ihrer Implementierung. Aktivieren Sie das Hot-Plug-in für CPU und RAM.
++
+|===
+| 10.3 Bereitstellungstyp | CPU (Core) pro Node | Arbeitsspeicher (GB) pro Node | Festplattenspeicher (GB) pro Node | CPU gesamt (Core) | Arbeitsspeicher (GB) | Gesamter Festplattenspeicher (GB) 
+
+
+| Nicht-HA klein | 9 | 18 | 350 | 9 | 18 | 350 
+
+
+| Non-HA Medium | 13 | 26 | 350 | 13 | 26 | 350 
+
+
+| HA klein | 9 | 18 | 350 | 27 | 54 | 1050 
+
+
+| HA Mittel | 13 | 26 | 350 | 39 | 78 | 1050 
+
+
+| HA groß | 17 | 34 | 350 | 51 | 102 | 1050 
+|===
+* SCHALTEN Sie die VM EIN, nachdem die Änderungen vorgenommen wurden, und warten Sie, bis die Services ausgeführt werden.
+* Nehmen Sie im Fall der HA-Bereitstellung die Ressourcenänderungen vor, aktivieren Sie das Hot-Plug-in für CPU und RAM und fügen Sie 100 GB Festplatten für den zweiten und den dritten Node hinzu. Diese Nodes müssen nicht neu gebootet werden.
+* Wenn die Appliance als lokaler Pfad (einfache Implementierung) mit den ONTAP-Tools 10.1 oder 10.2 implementiert wurde, müssen Sie vor dem Upgrade einen stillgelegten Snapshot erstellen.
+
+
+Wenn Sie ein Upgrade von ONTAP Tools für VMware vSphere 10.0 auf 10.1 durchführen, müssen Sie die folgenden Schritte ausführen, bevor Sie mit dem Upgrade fortfahren:
+
+*Diagnose Aktivieren*
+
+. Öffnen Sie im vCenter Server eine Konsole für ONTAP Tools.
+. Melden Sie sich als Wartungbenutzer an.
+. Geben Sie *4* ein, um *Support und Diagnose* auszuwählen.
+. Geben Sie *2* ein, um *Ferndiagnosezugriff aktivieren* auszuwählen.
+. Geben Sie *y* ein, um das Passwort Ihrer Wahl festzulegen.
+. Melden Sie sich vom Terminal/Putty an der VM-IP-Adresse mit dem Benutzer als 'diag' und dem Passwort an, das im vorherigen Schritt festgelegt wurde.
+
+
+*Nehmen Sie ein Backup von MongoDB*
+
+Führen Sie die folgenden Befehle aus, um ein Backup von MongoDB zu erstellen:
+
+* Kn exec -it ntv-mongodb-0 sh - kn ist ein Alias von kubectl -n ntv-System.
+* Führen Sie den Befehl _env_grep MONGODB_ROOT_PASSWORD_ innerhalb des Pod aus.
+* Führen Sie den Befehl _exit_ aus, um aus dem Pod zu kommen.
+* Führen Sie den Befehl _kn exec ntv-mongodb-0 --mongodump -U ROOT -p MONGODB_ROOT_PASSWORD --Archive=/tmp/mongodb-backup.gz --gzip_ aus, um den Satz MONGO_ROOT_PASSWORD aus dem obigen Befehl zu ersetzen.
+* Führen Sie den Befehl _kn CP ntv-mongodb-0:/tmp/mongodb-backup.gz ./mongodb-Backup.gz_ aus, um das mit dem obigen Befehl erstellte mongodb Backup vom Pod auf den Host zu kopieren.
+
+
+*Nehmen Sie den Quaise-Schnappschuss aller Volumen*
+
+* Führen Sie den Befehl 'kn get pvc' aus und speichern Sie die Befehlsausgabe.
+* Erstellen Sie Snapshots aller Volumes nacheinander mit einer der folgenden Methoden:
++
+** Führen Sie in der CLI den Befehl _Volume Snapshot create -vserver <vserver_name> -Volume <volume_name> -Snapshot <snapshot_name>_ aus
+** Durchsuchen Sie in der Benutzeroberfläche von ONTAP System Manager das Volume anhand des Namens in der Suchleiste, und öffnen Sie dann das Volume, indem Sie den Namen auswählen. Wechseln Sie zu Snapshot und fügen Sie den Snapshot dieses Volumes hinzu.
+
+
+
+
+*Nehmen Sie die Momentaufnahme von ONTAP-Tools für VMware vSphere VMs in vCenter (3VMs im Fall der HA-Bereitstellung, 1 VM im Falle einer nicht-HA-Bereitstellung)*
+
+* Wählen Sie in der vSphere-Client-Benutzeroberfläche die VM aus.
+* Gehen Sie auf die Registerkarte Snapshots und wählen Sie die Schaltfläche *Snapshot erstellen*. Erstellen Sie einen stillgelegten Snapshot der VM. Weitere Informationen finden Sie unter https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/take-snapshots-of-a-virtual-machine.html["Erstellen Sie einen Snapshot einer virtuellen Maschine"^].
+
+
+Löschen Sie vor der Durchführung des Upgrades die abgeschlossenen Pods aus dem Log Bundle mit dem Präfix „Generate-Support-Bundle-Job“. Wenn derzeit das Support-Bundle generiert wird, warten Sie, bis der Vorgang abgeschlossen ist, und löschen Sie den Pod.
+
+Für jede Art von Upgrade müssen Sie eine zusätzliche 100-GB-Festplatte (HDD) hinzufügen. Führen Sie die folgende Aufgabe aus, um eine Festplatte hinzuzufügen.
+
+. Wählen Sie die VM in der Single Node-Konfiguration oder alle drei VMs in der HA-Konfiguration aus.
+. Klicken Sie mit der rechten Maustaste auf die VM(s), und wählen Sie *Neues Gerät hinzufügen* > *Festplatte*
+. Fügen Sie eine 100-GB-Festplatte in das Feld * Neue Festplatte* ein.
+. Wählen Sie *Anwenden*
+
+
+Aktualisieren Sie nach dem Hinzufügen der Festplatte die VM-Ressourcen für die entsprechenden Konfigurationen, und starten Sie die primäre VM neu.
+
+Es wird eine neue Festplatte erstellt. Die dynamische Storage-bereitstellung erstellt oder repliziert die Volumes mithilfe dieser HDD.
+
+.Schritte
+. Laden Sie ONTAP-Tools für VMware vSphere hoch, aktualisieren Sie ISO in die Content Library.
+. Wählen Sie auf der primären VM-Seite *actions* > *Edit Settings* aus
+. Wählen Sie die ISO-Datei der Inhaltsbibliothek im Fenster Einstellungen bearbeiten unter dem Feld *CD/DVD-Laufwerk* aus.
+. Wählen Sie die ISO-Datei und dann *OK*. Aktivieren Sie das Kontrollkästchen Verbunden im Feld *CD/DVD-Laufwerk*. image:../media/primaryvm-edit-settings.png["Einstellungen bearbeiten"]
+. Öffnen Sie im vCenter Server eine Konsole für ONTAP Tools.
+. Melden Sie sich als Wartungbenutzer an.
+. Geben Sie *3* ein, um das Menü Systemkonfiguration auszuwählen.
+. Geben Sie *7* ein, um die Upgrade-Option auszuwählen.
+. Wenn Sie ein Upgrade durchführen, werden die folgenden Aktionen automatisch ausgeführt:
++
+.. Zertifikataktualisierung
+.. Remote-Plug-in-Upgrade
+
+
+
+
+Nach einem Upgrade auf ONTAP Tools für VMware vSphere 10.3 haben Sie folgende Möglichkeiten:
+
+* Deaktivieren Sie die Dienste über die Benutzeroberfläche des Managers
+* Wechseln Sie von einer Einrichtung ohne HA-Konfiguration zu einer HA-Einrichtung
+* Skalieren Sie eine kleine, nicht-HA-Konfiguration als Medium ohne HA oder auf eine mittlere oder große HA-Konfiguration.
+* Starten Sie im Fall eines Upgrades ohne HA die VM der ONTAP Tools neu, um die Änderungen widerzuspiegeln. Booten Sie im Fall eines HA-Upgrades den ersten Node neu, um die Änderungen am Node widerzuspiegeln.
+
+
+*Nach Ihrer Beendigung*
+
+Nachdem Sie ein Upgrade von früheren Versionen von ONTAP-Tools für VMware vSphere auf 10.3 durchgeführt haben, können Sie die SRA-Adapter erneut scannen, um sicherzustellen, dass die Details auf der Seite VMware Live Site Recovery Storage Replication Adapters aktualisiert werden.
+
+Löschen Sie die Trident-Volumes nach einem erfolgreichen Upgrade manuell aus ONTAP, indem Sie das folgende Verfahren durchführen:
+
+
+NOTE: Diese Schritte sind nicht erforderlich, wenn die ONTAP-Tools für VMware vSphere 10.1 oder 10.2 in nicht-HA-kleinen oder mittelgroßen (lokalen Pfad)-Konfigurationen verwendet wurden.
+
+. Öffnen Sie im vCenter Server eine Konsole für ONTAP Tools.
+. Melden Sie sich als Wartungbenutzer an.
+. Geben Sie *4* ein, um das Menü *Support und Diagnose* auszuwählen.
+. Geben Sie *1* ein, um die Option *Access Diagnostics Shell* auszuwählen.
+. Führen Sie den folgenden Befehl aus
++
+[listing]
+----
+sudo python3 /home/maint/scripts/ontap_cleanup.py
+----
+. Geben Sie den ONTAP-Benutzernamen und das Passwort ein
+
+
+Dadurch werden alle Trident Volumes in ONTAP gelöscht, die in ONTAP Tools für VMware vSphere 10.1/10.2 verwendet werden.
+
+*Verwandte Informationen*
+
+link:../migrate/migrate-to-latest-ontaptools.html["Migrieren Sie von ONTAP-Tools für VMware vSphere 9.x zu 10.3"]

@@ -1,0 +1,70 @@
+---
+permalink: protect/configure-storage-replication-adapter-for-san-environment.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Sie sollten die Speichersysteme einrichten, bevor Sie Storage Replication Adapter \(SRA\) für VMware Live Site Recovery ausführen.' 
+---
+= Konfiguration von SRA für SAN- und NAS-Umgebungen
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie sollten die Speichersysteme einrichten, bevor Sie Storage Replication Adapter (SRA) für die VMware Live Site Recovery ausführen.
+
+
+
+== Konfiguration von SRA für SAN-Umgebungen
+
+.Bevor Sie beginnen
+Die folgenden Programme sollten auf dem geschützten Standort und dem Wiederherstellungsstandort installiert sein:
+
+* VMware Live Site Recovery
++
+Die Dokumentation zur Installation von VMware Live Site Recovery ist auf der VMware-Website verfügbar.
+
++
+https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery/live-site-recovery/9-0/about-vmware-live-site-recovery-installation-and-configuration.html["Über VMware Live Site Recovery"]
+
+* SRA
++
+Der Adapter wird auf VMware Live Site Recovery installiert.
+
+
+
+.Schritte
+. Vergewissern Sie sich, dass die primären ESXi-Hosts mit den LUNs im primären Speichersystem am geschützten Standort verbunden sind.
+. Überprüfen Sie, ob die LUNS in Initiatorgruppen sind, für die die `ostype` Option auf dem primären Storage-System auf „_VMware_“ gesetzt ist.
+. Überprüfen Sie, ob die ESXi-Hosts am Wiederherstellungsstandort über eine geeignete iSCSI-Verbindung zur Storage Virtual Machine (SVM) verfügen. Die ESXi-Hosts am sekundären Standort sollten Zugriff auf den sekundären Standortspeicher haben, und die ESXi-Hosts am primären Standort sollten Zugriff auf den primären Standortspeicher haben.
++
+Dazu müssen Sie entweder überprüfen, ob auf den ESXi Hosts lokale LUNs auf der SVM verbunden sind `iscsi show initiators`, oder den Befehl auf den SVMs eingeben. Überprüfen Sie den LUN-Zugriff auf die zugeordneten LUNs auf dem ESXi-Host, um die iSCSI-Konnektivität zu überprüfen.
+
+
+
+
+
+== Konfiguration von SRA für NAS-Umgebungen
+
+.Bevor Sie beginnen
+Die folgenden Programme sollten auf dem geschützten Standort und dem Wiederherstellungsstandort installiert sein:
+
+* VMware Live Site Recovery
++
+Dokumentation zur Installation von VMware Live Site Recovery finden Sie auf der VMware-Website.
+
++
+https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery/live-site-recovery/9-0/about-vmware-live-site-recovery-installation-and-configuration.html["Über VMware Live Site Recovery"]
+
+* SRA
++
+Der Adapter wird auf VMware Live Site Recovery und dem SRA-Server installiert.
+
+
+
+.Schritte
+. Überprüfen Sie, ob die Datenspeicher am geschützten Standort virtuelle Maschinen enthalten, die bei vCenter Server registriert sind.
+. Überprüfen Sie, ob die ESXi-Hosts am geschützten Standort die NFS-Exporte-Volumes von der Storage Virtual Machine (SVM) gemountet haben.
+. Überprüfen Sie, ob gültige Adressen wie IP-Adresse, Hostname oder FQDN, auf denen die NFS-Exporte vorhanden sind, im Feld *NFS-Adressen* angegeben sind, wenn Sie mit dem Array Manager-Assistenten Arrays zur VMware Live Site Recovery hinzufügen.
+.  `ping`Überprüfen Sie mit dem Befehl auf jedem ESXi Host am Recovery-Standort, ob der Host über einen VMkernel Port verfügt, der auf die IP-Adressen zugreifen kann, die für NFS-Exporte der SVM verwendet werden.
+

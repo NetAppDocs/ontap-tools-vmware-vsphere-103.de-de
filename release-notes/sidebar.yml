@@ -1,0 +1,10 @@
+---
+section: release-notes
+title: Versionshinweise
+entries:
+- title: Versionshinweise
+  url: "/release-notes/release-notes.html"
+- title: Neuerungen bei ONTAP Tools für VMware vSphere 10.3
+  url: "/release-notes/whats-new.html"
+- title: Vergleich der Funktionen der ONTAP Tools 9 und ONTAP Tools 10
+  url: "/release-notes/ontap-tools-9-ontap-tools-10-feature-comparison.html"

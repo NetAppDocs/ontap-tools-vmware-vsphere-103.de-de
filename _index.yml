@@ -1,0 +1,40 @@
+---
+indexpage:
+  title: Dokumentation zu ONTAP Tools für VMware vSphere 10.3
+  lead: Mit den ONTAP Tools für VMware vSphere können Sie Ihre virtuellen Datenspeicher
+    in Ihrer vCenter Server-Umgebung konfigurieren, managen und sichern.
+  tiles:
+  - title: Los geht's
+    links:
+    - title: Versionshinweise
+      url: https://library.netapp.com/ecm/ecm_download_file/ECMLP3334864
+    - title: Erfahren Sie mehr über ONTAP Tools für VMware vSphere
+      url: "/concepts/ontap-tools-overview.html"
+    - title: Implementieren Sie ONTAP-Tools für VMware vSphere
+      url: "/deploy/ontap-tools-deployment.html"
+    - title: Führen Sie ein Upgrade auf die neueste Version der ONTAP Tools für VMware
+        vSphere durch
+      url: "/upgrade/upgrade-ontap-tools.html"
+    - title: Migrieren Sie die ONTAP-Tools für VMware vSphere
+      url: migrate/migrate-to-latest-ontaptools.html
+  - title: Verwenden Sie ONTAP Tools für VMware vSphere
+    links:
+    - title: Konfigurieren Sie die rollenbasierte Zugriffssteuerung
+      url: "/concepts/rbac-learn-about.html"
+    - title: Konfigurieren Sie die Remote-Diagnose
+      url: "/manage/configure-remote-diagnostic-access.html"
+    - title: Hochverfügbarkeit für ONTAP Tools für VMware vSphere
+      url: "/concepts/high-availability.html"
+    - title: Sichern Sie Ihre Datenspeicher
+      url: "/protect/enable-storage-replication-adapter.html"
+  - title: Mehr Ressourcen
+    links:
+    - title: Dokumentation für frühere Versionen von ONTAP Tools für VMware vSphere
+        9
+      url: https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=63792
+    - title: NetApp Knowledge Base – ONTAP Tools für VMware vSphere
+      url: https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/VSC_and_VASA_Provider
+    - title: NetApp-Community – ONTAP-Tools für VMware vSphere
+      url: https://community.netapp.com/t5/VMware-Solutions-Discussions/bd-p/vmware-solutions-discussions
+    - title: Informieren Sie sich über VMware vSphere mit ONTAP
+      url: https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-overview.html#why-ontap-for-vsphere

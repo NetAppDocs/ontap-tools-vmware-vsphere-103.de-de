@@ -1,0 +1,36 @@
+---
+permalink: manage/unmount-datastores-on-host.html 
+sidebar: sidebar 
+keywords:  
+summary: Durch die Unmounten der Datastore-Aktion wird ein NFS- oder VMFS-Datastore von ESXi-Hosts abgehängt. Die Aktion „Datastore unmounten“ ist für NFS- und VMFS-Datastores aktiviert, die von den ONTAP-Tools für VMware vSphere erkannt oder gemanagt werden. 
+---
+= Unmounten Sie NFS- und VMFS-Datastores
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durch die Unmounten der Datastore-Aktion wird ein NFS- oder VMFS-Datastore von ESXi-Hosts abgehängt. Die Aktion „Datastore unmounten“ ist für NFS- und VMFS-Datastores aktiviert, die von den ONTAP-Tools für VMware vSphere erkannt oder gemanagt werden.
+
+.Schritte
+. Melden Sie sich beim vSphere-Client an
+. Klicken Sie mit der rechten Maustaste auf ein NFS- oder VMFS-Datastore-Objekt und wählen Sie *Datastore unmounten* aus.
++
+Ein Dialogfeld wird geöffnet und listet die ESXi-Hosts auf, auf denen der Datastore gemountet ist. Wenn der Vorgang auf einem geschützten Datastore ausgeführt wird, wird eine Warnmeldung auf dem Bildschirm angezeigt.
+
+. Wählen Sie einen oder mehrere ESXi-Hosts aus, um die Bereitstellung des Datastore aufzuheben.
++
+Sie können den Datastore nicht von allen Hosts abladen. Die Benutzeroberfläche schlägt vor, dass Sie stattdessen den Vorgang zum Löschen von Datenspeichern verwenden.
+
+. Wählen Sie die Schaltfläche *Unmount*.
++
+Wenn der Datastore Teil eines geschützten Host-Clusters ist, wird eine Warnmeldung angezeigt.
+
+
+
+
+NOTE: Wenn der geschützte Datastore abgehängt wird, kann die Einstellung für den ausgehenden Schutz zu einem teilweisen Schutz führen. link:../manage/edit-hostcluster-protection.html["Geschütztes Host-Cluster ändern"]Informationen zum Aktivieren des vollständigen Schutzes finden Sie unter.
+
+.Was kommt als Nächstes?
+Sie können den Fortschritt im Fenster „Letzte Aufgaben“ verfolgen.

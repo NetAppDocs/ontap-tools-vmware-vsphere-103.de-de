@@ -1,0 +1,30 @@
+---
+permalink: manage/start-the-ssh-on-other-nodes.html 
+sidebar: sidebar 
+keywords:  
+summary: Sie müssen SSH auf anderen Nodes vor dem Upgrade starten. 
+---
+= Starten Sie SSH auf anderen Nodes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen SSH auf anderen Nodes vor dem Upgrade starten.
+
+.Bevor Sie beginnen
+Die VASA Provider-Erweiterung sollte für Ihre vCenter Server-Instanz aktiviert sein.
+
+*Über diese Aufgabe*
+
+Führen Sie dieses Verfahren vor dem Upgrade für jeden der Nodes durch.
+
+.Schritte
+. Öffnen Sie über den vCenter Server eine Konsole für VASA Provider.
+. Melden Sie sich als Wartungbenutzer an.
+. Geben Sie ein `4`, um Support und Diagnose auszuwählen.
+. Geben Sie ein `1`, um Access Diagnostic Shell auszuwählen.
+. Geben Sie ein, `y` um fortzufahren.
+. Führen Sie den Befehl _sudo systemctl restart ssh_ aus.
+

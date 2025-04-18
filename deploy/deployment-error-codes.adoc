@@ -1,0 +1,129 @@
+---
+permalink: deploy/deployment-error-codes.html 
+sidebar: sidebar 
+keywords: upgrade 
+summary: Auf dieser Seite werden die Fehlercodes für die Bereitstellung, den Neustart und die Wiederherstellungsvorgänge von ONTAP-Tools für das VMware vSphere-System erläutert. 
+---
+= Fehlercodes für die Bereitstellung
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Während der Bereitstellung, des Neustarts und der Wiederherstellungsvorgänge von ONTAP-Tools für VMware vSphere können Fehlercodes auftreten. Die Fehlercodes sind fünf Ziffern lang, wobei die ersten beiden Ziffern das Skript darstellen, das auf das Problem gestoßen ist, und die letzten drei Ziffern den spezifischen Workflow innerhalb dieses Skripts darstellen.
+
+Alle Fehlerprotokolle werden in der Datei ansible-perl-errors.log aufgezeichnet, um die Nachverfolgung und Behebung von Problemen zu erleichtern. Diese Protokolldatei enthält den Fehlercode und die fehlgeschlagene Ansible-Aufgabe.
+
+
+NOTE: Die auf dieser Seite angegebenen Fehlercodes dienen nur als Referenz. Wenden Sie sich an das Support-Team, wenn der Fehler weiterhin besteht oder wenn keine Lösung erwähnt wird.
+
+In der folgenden Tabelle sind die Fehlercodes und die entsprechenden Dateinamen aufgeführt.
+
+|===
+
+
+| *Fehlercode* | *Skriptname* 
+
+
+| 00 | firstboot-network-config.pl, Mode Deployment 
+
+
+| 01 | firstboot-network-config.pl, Modusaktualisierung 
+
+
+| 02 | firstboot-inputs-validation.pl 
+
+
+| 03 | firstboot-deploy-otv-ng.pl, Deploy, HA 
+
+
+| 04 | firstboot-deploy-otv-ng.pl, Deploy, non-HA 
+
+
+| 05 | firstboot-deploy-otv-ng.pl, Neustart 
+
+
+| 06 | firstboot-deploy-otv-ng.pl, Upgrade, HA 
+
+
+| 07 | firstboot-deploy-otv-ng.pl, Upgrade, nicht HA 
+
+
+| 08 | firstboot-otv-recovery.pl 
+
+
+| 09 | post-deploy-upgrade.pl 
+|===
+Die letzten drei Ziffern des Fehlercodes zeigen den spezifischen Workflow-Fehler im Skript an:
+
+|===
+
+
+| *Deployment-Fehlercode* | *Arbeitsablauf* | * Auflösung* 
+
+
+| 050 | Generierung des SSH-Schlüssels fehlgeschlagen | Starten Sie die primäre virtuelle Maschine (VM) neu. 
+
+
+| 053 | RKE2 konnte nicht installiert werden | Führen Sie entweder Folgendes aus und starten Sie die primäre VM neu oder Neuimplementierung: Sudo rke2-killall.sh (alle VMs) sudo rke2-uninstall.sh (alle VMs). 
+
+
+| 054 | Einstellung von kubeconfig fehlgeschlagen | Neuimplementierung 
+
+
+| 055 | Fehler beim Bereitstellen der Registrierung | Wenn der Registrierungs-Pod vorhanden ist, warten Sie, bis der Pod bereit ist, starten Sie dann die primäre VM neu oder starten Sie es andernfalls neu. 
+
+
+| 059 | Die KubeVip-Bereitstellung ist fehlgeschlagen | Vergewissern Sie sich, dass die während der Implementierung angegebene virtuelle IP-Adresse für die Kubernetes-Kontrollebene und den Load Balancer im selben VLAN gehören und freie IP-Adressen sind. Neu starten, wenn alle vorherigen Punkte korrekt sind. Ansonsten Neuimplementierung. 
+
+
+| 060 | Die Benutzerbereitstellung ist fehlgeschlagen | Neu Starten 
+
+
+| 061 | Die Bereitstellung der Dienste ist fehlgeschlagen | Führen Sie einfache Kubernetes-Fehlerbehebungen wie get Pods, get rs, get svc usw. im ntv-System-Namespace durch, um weitere Details und Fehlerprotokolle unter /var/log/ansible-perl-errors.log und /var/log/ansible-run.log zu erhalten und Neuimplementierungen durchzuführen. 
+
+
+| 062 | Die Bereitstellung der ONTAP Tools Services ist fehlgeschlagen | Weitere Informationen und Neuimplementierungen finden Sie in den Fehlerprotokollen unter /var/log/ansible-perl-errors.log. 
+
+
+| 065 | Die URL der Swagger-Seite ist nicht erreichbar | Neuimplementierung 
+
+
+| 066 | Fehler bei den Schritten nach der Bereitstellung für das Gateway-Zertifikat | Gehen Sie wie folgt vor, um das Upgrade wiederherzustellen/abzuschließen: * Diagnostic Shell aktivieren. * Führen Sie den Befehl 'sudo perl /Home/maint/scripts/post-deploy-upgrade.pl --postDeploy' aus. * Überprüfen Sie die Protokolle unter /var/log/post-deploy-Upgrade.log. 
+
+
+| 088 | Die Konfiguration der Protokollrotation für journald ist fehlgeschlagen | Überprüfen Sie die VM-Netzwerkeinstellungen, die mit dem Host kompatibel sind, auf dem die VM gehostet wird. Sie können versuchen, auf einen anderen Host zu migrieren und die VM neu zu starten. 
+
+
+| 089 | Ändern der Eigentumsrechte für die Konfigurationsdatei „Zusammenfassung Protokoll drehen“ ist fehlgeschlagen | Starten Sie die primäre VM neu. 
+
+
+| 096 | Installieren Sie die dynamische Storage-provisionierung | - 
+
+
+| 108 | Das Seeding des Skripts ist fehlgeschlagen | - 
+|===
+|===
+
+
+| *Fehlercode für Neustart* | *Arbeitsablauf* | * Auflösung* 
+
+
+| 067 | Zeitüberschreitung beim Warten auf Rke2-Server. | - 
+
+
+| 101 | Fehler beim Zurücksetzen des Benutzerpassworts für Wartung/Konsole. | - 
+
+
+| 102 | Fehler beim Löschen der Kennwortdatei beim Zurücksetzen des Benutzerpassworts für Wartung/Konsole. | - 
+
+
+| 103 | Fehler beim Aktualisieren des neuen Benutzerpassworts für Wartung/Konsole im Tresor. | - 
+
+
+| 088 | Die Konfiguration der Protokollrotation für journald ist fehlgeschlagen. | Überprüfen Sie die VM-Netzwerkeinstellungen, die mit dem Host kompatibel sind, auf dem die VM gehostet wird. Sie können versuchen, auf einen anderen Host zu migrieren und die VM neu zu starten. 
+
+
+| 089 | Ändern der Eigentumsrechte für die Konfigurationsdatei „Zusammenfassung Protokoll drehen“ ist fehlgeschlagen. | Starten Sie den VM neu. 
+|===

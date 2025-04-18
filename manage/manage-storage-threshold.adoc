@@ -1,0 +1,21 @@
+---
+permalink: manage/manage-storage-threshold.html 
+sidebar: sidebar 
+keywords:  
+summary: Sie können den Schwellenwert für den Empfang von Benachrichtigungen in vCenter Server festlegen, wenn das Volume und die Gesamtkapazität des Aggregats bestimmte Ebenen erreichen. 
+---
+= Managen von Storage-Schwellenwerten
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können den Schwellenwert für den Empfang von Benachrichtigungen in vCenter Server festlegen, wenn das Volume und die Gesamtkapazität des Aggregats bestimmte Ebenen erreichen.
+
+.Schritte
+. Melden Sie sich beim vSphere-Client an
+. Wählen Sie auf der Shortcuts-Seite unter dem Plug-ins-Abschnitt *NetApp ONTAP Tools* aus.
+. Navigieren Sie im linken Bereich der ONTAP-Tools zu *Einstellungen* > *Schwellenwerteinstellungen* > *Bearbeiten*.
+. Geben Sie im Fenster *Schwellenwert bearbeiten* die gewünschten Werte in die Felder *nahezu voll* und *voll* ein und wählen Sie *Speichern*. Sie können die Zahlen auf die empfohlenen Werte zurücksetzen: 80 für fast voll und 90 für voll.
+

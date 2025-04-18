@@ -1,0 +1,65 @@
+---
+permalink: protect/configure-array-manager.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Sie können Storage Replication Adapter \(SRA\) mit dem Array Manager-Assistenten von VMware Live Site Recovery konfigurieren, um Interaktionen zwischen VMware Live Site Recovery und virtuellen Storage-Maschinen \(SVMs\) zu ermöglichen.' 
+---
+= Konfigurieren Sie SRA mit Array Manager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können Storage Replication Adapter (SRA) mithilfe des Array Manager-Assistenten von VMware Live Site Recovery konfigurieren, um Interaktionen zwischen VMware Live Site Recovery und Storage Virtual Machines (SVMs) zu ermöglichen.
+
+.Bevor Sie beginnen
+* Sie sollten die geschützten Standorte und Recovery-Standorte in VMware Live Site Recovery gekoppelt haben.
+* Sie sollten Ihren Onboarding Storage konfiguriert haben, bevor Sie den Array Manager konfigurieren.
+* Die SnapMirror Beziehungen zwischen den geschützten Standorten und den Recovery-Standorten sollten konfiguriert und repliziert werden.
+* Sie sollten die SVM-Management-LIFs aktivieren, um die Mandantenfähigkeit zu aktivieren.
+
+
+SRA unterstützt das Management auf Cluster-Ebene und das Management der SVM. Wenn Sie Storage auf Cluster-Ebene hinzufügen, können Sie Vorgänge für alle SVMs im Cluster erkennen und ausführen. Wenn Sie Storage auf SVM-Ebene hinzufügen, können Sie nur die spezifische SVM managen.
+
+.Schritte
+. Wählen Sie in VMware Live Site Recovery *Array Manager* > *Array Manager hinzufügen* aus.
+. Geben Sie die folgenden Informationen ein, um das Array in VMware Live Site Recovery zu beschreiben:
++
+.. Geben Sie einen Namen ein, um den Array-Manager im Feld *Anzeigename* zu identifizieren.
+.. Wählen Sie im Feld *SRA Typ* *NetApp Storage Replication Adapter für ONTAP* aus.
+.. Geben Sie die Informationen ein, die für eine Verbindung zum Cluster oder zur SVM benötigen:
++
+*** Wenn Sie eine Verbindung zu einem Cluster herstellen, sollten Sie die Cluster-Management-LIF eingeben.
+*** Wenn Sie eine direkte Verbindung zu einer SVM herstellen, sollten Sie die IP-Adresse der SVM Management LIF eingeben.
++
+
+NOTE: Beim Konfigurieren des Array Managers sollten Sie dieselbe Verbindung (IP-Adresse) für das Speichersystem verwenden, mit dem das Storage-System in ONTAP Tools für VMware vSphere integriert wurde. Wenn beispielsweise die Array Manager-Konfiguration im Umfang der SVM konfiguriert ist, sollte der Storage unter den ONTAP Tools für VMware vSphere auf SVM-Ebene hinzugefügt werden.
+
+
+
+.. Wenn Sie eine Verbindung zu einem Cluster herstellen, geben Sie den Namen der SVM in das Feld *SVM Name* ein.
++
+Sie können dieses Feld auch leer lassen.
+
+.. Geben Sie die Volumes ein, die im Feld *Liste der Volumes include* erkannt werden sollen.
++
+Sie können das Quell-Volume am geschützten Standort und das replizierte Ziel-Volume am Recovery-Standort eingeben.
+
++
+Wenn Sie beispielsweise Volume src_vol1 ermitteln möchten, das sich in einer SnapMirror-Beziehung zu Volume dst_vol1 befindet, sollten Sie im Feld geschützter Standort src_vol1 und im Feld Wiederherstellungsstandort dst_vol1 angeben.
+
+.. *(Optional)* Geben Sie im Feld *Volume exclude list* die Volumes ein, die von der Ermittlung ausgeschlossen werden sollen.
++
+Sie können das Quell-Volume am geschützten Standort und das replizierte Ziel-Volume am Recovery-Standort eingeben.
+
++
+Wenn Sie beispielsweise Volume _src_vol1_ aus einer SnapMirror-Beziehung mit Volume _dst_vol1_ ausschließen möchten, sollten Sie _src_vol1_ im Feld geschützter Standort und _dst_vol1_ im Feld Wiederherstellungsstandort angeben.
+
+
+
+. Wählen Sie *Weiter*.
+. Überprüfen Sie, ob das Array erkannt und unten im Fenster Array-Manager hinzufügen angezeigt wird, und wählen Sie *Fertig stellen*.
+
+
+Sie können dieselben Schritte für den Recovery-Standort befolgen, indem Sie die entsprechenden SVM-Management-IP-Adressen und Anmeldedaten verwenden. Auf dem Bildschirm Array-Paare aktivieren des Assistenten zum Hinzufügen von Array-Manager sollten Sie überprüfen, ob das richtige Array-Paar ausgewählt ist und dass es als bereit für die Aktivierung angezeigt wird.

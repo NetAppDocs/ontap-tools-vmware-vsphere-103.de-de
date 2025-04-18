@@ -1,0 +1,47 @@
+---
+permalink: manage/delete-ds.html 
+sidebar: sidebar 
+keywords: vVols datastore,delete vVol 
+summary: Mit der Aktion „Datastore löschen“ wird der Datastore gelöscht. Im Falle eines NFS- oder VMFS-Datenspeichers wird ein Dialogfeld mit der Liste der VMs angezeigt, die den Datenspeicher verwenden. 
+---
+= Löschen Sie Datastores
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die Aktion „Storage aus Datastore entfernen“ wird von allen ONTAP-Tools für VMware vSphere unterstützt, die VVols-Datastores im vCenter Server erkannt oder gemanagt haben. Durch diese Aktion können Volumes aus dem VVols Datastore entfernt werden.
+
+Die Option zum Entfernen ist deaktiviert, wenn sich VVols auf einem bestimmten Volume befinden. Zusätzlich zum Entfernen von Volumes aus dem Datastore können Sie das ausgewählte Volume auf dem ONTAP-Speicher löschen.
+
+Löschen des Datastore Task aus den ONTAP-Tools für VMware vSphere im vCenter-Server führt Folgendes aus:
+
+* Unmountet den vVol Container.
+* Bereinigt igroup. Wenn Initiatorgruppe nicht verwendet wird, entfernt iqn von der Initiatorgruppe.
+* Löscht den Vvol-Container.
+* Belässt die Flex-Volumes auf dem Storage Array.
+
+
+Gehen Sie wie folgt vor, um NFS-, VMFS- oder vVOL-Datastore aus ONTAP-Tools aus vCenter Server zu löschen:
+
+.Schritte
+. Melden Sie sich beim vSphere-Client an
+. Klicken Sie mit der rechten Maustaste auf ein Hostsystem oder einen Hostcluster oder ein Rechenzentrum und wählen Sie *NetApp ONTAP Tools* > *Datastore löschen* aus.
++
+
+NOTE: Sie können die Datastores nicht löschen, wenn es virtuelle Maschinen gibt, die diesen Datastore verwenden. Sie müssen die virtuellen Maschinen in einen anderen Datenspeicher verschieben, bevor Sie den Datastore löschen. Sie können das Kontrollkästchen Volume delete nicht aktivieren, wenn der Datastore zu einem geschützten Host-Cluster gehört.
+
++
+.. Im Falle eines NFS- oder VMFS-Datenspeichers wird ein Dialogfeld mit der Liste der VMs angezeigt, die den Datenspeicher verwenden.
+.. Wenn der VMFS-Datastore auf ASA r2-Systemen erstellt wird und Teil des Schutzes ist, müssen Sie den Schutz des Datastore aufheben, bevor Sie ihn löschen.
+.. Im Fall eines VVols Datastore wird der Datastore durch die Aktion „Datastore löschen“ nur gelöscht, wenn keine VVols damit verbunden sind. Das Dialogfeld Datastore löschen bietet eine Option zum Löschen von Volumes aus dem ONTAP-Cluster.
+.. Bei auf ASA r2 Systemen basiertem VVols-Datastore ist das Kontrollkästchen zum Löschen der Backup-Volumes nicht anwendbar.
+
+
+. Um die Backing Volumes auf dem ONTAP-Speicher zu löschen, wählen Sie *Delete Volumes on ONTAP Cluster* aus.
++
+
+NOTE: Sie können das Volume im ONTAP-Cluster für einen VMFS-Datastore, der Teil des geschützten Host-Clusters ist, nicht löschen.
+
+

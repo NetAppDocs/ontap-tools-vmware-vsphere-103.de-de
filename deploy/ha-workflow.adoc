@@ -1,0 +1,41 @@
+---
+permalink: deploy/ha-workflow.html 
+sidebar: sidebar 
+keywords: ONTAP tools,Storage Replication Adapter 
+summary: Die ersten Schritte mit den ONTAP Tools für VMware vSphere sind ein paar Schritte. 
+---
+= Hochverfügbarkeits-Implementierungs-Workflow (HA)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Bei Nutzung von VVols Datastores müssen Sie die erste Implementierung der ONTAP Tools auf eine Hochverfügbarkeitskonfiguration (HA) erweitern und die VASA Provider Services aktivieren.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Eins"] Vertikale Skalierung der Implementierung
+[role="quick-margin-para"]
+Sie können die Konfiguration der ONTAP Tools für VMware vSphere vertikal skalieren, um die Anzahl der Nodes in der Implementierung zu erhöhen und die Konfiguration zu einem HA-Setup zu ändern.
+
+[role="quick-margin-list"]
+* link:../manage/edit-appliance-settings.html["Ändern Sie ONTAP-Tools für die VMware vSphere Konfiguration"]
+
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Zwei"] Aktivieren Sie Services
+[role="quick-margin-para"]
+Zum Konfigurieren des VVols-Datastores müssen Sie den VASA Provider-Service aktivieren. Registrieren Sie den VASA Provider bei vCenter, und stellen Sie sicher, dass Ihre Storage-Richtlinien die HA-Anforderungen erfüllen, einschließlich der richtigen Netzwerk- und Storage-Konfigurationen.
+
+[role="quick-margin-para"]
+Aktivieren Sie die SRA-Dienste zur Verwendung von ONTAP-Tools Storage Replication Adapter (SRA) für VMware Site Recovery Manager (SRM) oder VMware Live Site Recovery (VLSR).
+
+[role="quick-margin-list"]
+* link:../manage/enable-services.html["Aktivieren Sie VASA Provider- und SRA-Services"]
+
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Drittens"] Aktualisieren Sie die Zertifikate
+[role="quick-margin-para"]
+Wenn Sie vVol-Datastores mit mehreren vCenter Server-Instanzen verwenden, aktualisieren Sie das selbstsignierte Zertifikat auf ein signiertes Zertifikat einer Zertifizierungsstelle (CA).
+
+[role="quick-margin-list"]
+* link:../manage/certificate-manage.html["Verwalten von Zertifikaten"]
+

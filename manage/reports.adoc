@@ -1,0 +1,20 @@
+---
+permalink: manage/reports.html 
+sidebar: sidebar 
+keywords:  
+summary: ONTAP Tools für das VMware vSphere Plug-in bieten Berichte für Virtual Machines und Datastores. 
+---
+= Berichte zu ONTAP Tools
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+ONTAP Tools für das VMware vSphere Plug-in bieten Berichte für Virtual Machines und Datastores. Wenn Sie im Abschnitt „Verknüpfungen“ des vCenter-Clients das Symbol „NetApp ONTAP-Tools für VMware vSphere“ auswählen, wechselt die Benutzeroberfläche zur Seite „Übersicht“. Wählen Sie die Registerkarte Berichte aus, um die virtuelle Maschine und den Bericht Datastores anzuzeigen.
+
+Der Bericht „Virtual Machines“ enthält die Liste der erkannten virtuellen Maschinen (mindestens eine Festplatte aus ONTAP-Storage-basierten Datastores) mit Leistungskennzahlen. Wenn Sie den VM-Datensatz erweitern, werden alle Informationen zum festplattenbezogenen Datenspeicher angezeigt.
+
+Der Datastores-Bericht zeigt die Liste erkannter oder anerkannter ONTAP Tools für von VMware vSphere gemanagte Datastores, die über das ONTAP Storage Back-End aller Arten mit Performance-Kennzahlen bereitgestellt werden.
+
+Mit der Option Spalten verwalten können Sie verschiedene Spalten ein- oder ausblenden.

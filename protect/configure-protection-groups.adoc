@@ -1,0 +1,67 @@
+---
+permalink: protect/configure-protection-groups.html 
+sidebar: sidebar 
+keywords:  
+summary: Sie sollten Schutzgruppen erstellen, um eine Gruppe virtueller Maschinen am geschützten Standort zu schützen. 
+---
+= Geschützte Standorte und Recovery-Standorte konfigurieren
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie sollten Schutzgruppen erstellen, um eine Gruppe virtueller Maschinen am geschützten Standort zu schützen.
+
+
+
+== Konfigurieren Sie Schutzgruppen
+
+.Bevor Sie beginnen
+Stellen Sie sicher, dass die Quell- und Zielstandorte für Folgendes konfiguriert sind:
+
+* Dieselbe Version von VMware Live Site Recovery ist installiert
+* Virtual Machines
+* Gepaarte geschützte Standorte und Recovery-Standorte
+* Quell- und Ziel-Datastores sollten auf den jeweiligen Sites gemountet werden
+
+
+.Schritte
+. Melden Sie sich bei vCenter Server an und wählen Sie dann *Site Recovery* > *Protection Groups* aus.
+. Wählen Sie im Bereich *Schutzgruppen* *Neu* aus.
+. Geben Sie einen Namen und eine Beschreibung für die Schutzgruppe, Richtung und wählen Sie *Weiter*.
+. Wählen Sie im Feld *Typ* die Option *Typ Feld...* als Datastore-Gruppen (Array-basierte Replikation) für NFS- und VMFS-Datastore aus. Die Fehlerdomäne ist nichts anderes als SVMs mit aktivierter Replizierung. Es werden die SVMs angezeigt, für die lediglich Peering implementiert ist und keine Probleme vorhanden sind.
+. Wählen Sie auf der Registerkarte Replikationsgruppen entweder das aktivierte Array-Paar oder die Replikationsgruppen aus, für die die virtuelle Maschine konfiguriert ist, und wählen Sie dann *Weiter* aus.
++
+Alle virtuellen Maschinen auf der Replikationsgruppe werden der Schutzgruppe hinzugefügt.
+
+. Wählen Sie entweder den vorhandenen Wiederherstellungsplan aus oder erstellen Sie einen neuen Plan, indem Sie *zu neuem Wiederherstellungsplan hinzufügen* auswählen.
+. Überprüfen Sie auf der Registerkarte bereit zur Fertigstellung die Details der von Ihnen erstellten Schutzgruppe, und wählen Sie dann *Fertig stellen* aus.
+
+
+
+
+== Kombinieren Sie geschützte Standorte und Recovery-Standorte
+
+Sie sollten die geschützten und Recovery-Standorte, die mit Ihrem vSphere Client erstellt wurden, koppeln, um Storage Replication Adapter (SRA) zur Erkennung der Speichersysteme zu aktivieren.
+
+.Bevor Sie beginnen
+* VMware Live Site Recovery sollte auf den geschützten und Recovery-Standorten installiert sein.
+* SRA sollte auf den geschützten und den Recovery-Standorten installiert sein.
+
+
+.Schritte
+. Doppelklicken Sie auf der vSphere Client-Startseite auf *Site Recovery* und wählen Sie *Sites* aus.
+. Wählen Sie *Objects* > *Actions* > *Pair Sites*.
+. Geben Sie im Dialogfeld *Pair Site Recovery Manager Servers* die Adresse des Platform Services Controllers des geschützten Standorts ein, und wählen Sie dann *Next*.
+. Gehen Sie im Abschnitt vCenter Server auswählen folgendermaßen vor:
++
+.. Stellen Sie sicher, dass der vCenter Server des geschützten Standorts als übereinstimmender Kandidat für das Pairing angezeigt wird.
+.. Geben Sie die SSO-Administratoranmeldedaten ein, und wählen Sie dann *Finish*.
+
+
+. Wenn Sie dazu aufgefordert werden, wählen Sie *Ja*, um die Sicherheitszertifikate zu akzeptieren.
+
+
+.Ergebnis
+Sowohl die geschützten als auch die Wiederherstellungsstandorte werden im Dialogfeld Objekte angezeigt.

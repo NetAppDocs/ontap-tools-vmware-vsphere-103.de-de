@@ -1,0 +1,34 @@
+---
+permalink: manage/mount-datastores-on-host.html 
+sidebar: sidebar 
+keywords:  
+summary: Durch das Mounten eines Datenspeichers können zusätzliche Hosts auf den Speicher zugreifen. Nachdem Sie die Hosts der VMware Umgebung hinzugefügt haben, können Sie den Datastore auf den zusätzlichen Hosts einbinden. 
+---
+= Mounten von NFS- und VMFS-Datastores
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Durch das Mounten eines Datenspeichers können zusätzliche Hosts auf den Speicher zugreifen. Nachdem Sie die Hosts der VMware Umgebung hinzugefügt haben, können Sie den Datastore auf den zusätzlichen Hosts einbinden.
+
+.Über diese Aufgabe
+* Einige Rechtsklick-Aktionen sind abhängig von der vSphere-Client-Version und dem ausgewählten Datastore-Typ deaktiviert oder nicht verfügbar.
++
+** Wenn Sie vSphere Client 8.0 oder höher verwenden, sind einige der Optionen mit der rechten Maustaste ausgeblendet.
+** Von vSphere 7.0U3 bis vSphere 8.0, obwohl die Optionen angezeigt werden, wird die Aktion deaktiviert.
+
+
+* Die Option Datastore mounten ist deaktiviert, wenn der Host-Cluster durch einheitliche Konfigurationen geschützt ist.
+
+
+.Schritte
+. Wählen Sie auf der vSphere Client-Startseite *Hosts und Cluster* aus.
+. Wählen Sie im linken Navigationsbereich die Rechenzentren aus, die die Hosts enthalten.
+. Um NFS/VMFS-Datastores auf Host- oder Host-Cluster zu mounten, klicken Sie mit der rechten Maustaste und wählen Sie *NetApp ONTAP Tools* > *Mount Datastores* aus.
+. Wählen Sie die Datenspeicher aus, die Sie mounten möchten, und wählen Sie *Mount*.
+
+
+.Was kommt als Nächstes?
+Sie können den Fortschritt im Fenster „Letzte Aufgabe“ verfolgen.
