@@ -63,7 +63,7 @@ Verwenden Sie das folgende Arbeitsblatt, um die erforderlichen Informationen fü
 | IP-Adresse für die Anwendung ONTAP Tools |  
 
 
-| Node Interconnect IP-Adresse für die Kommunikation zwischen den Nodes |  
+| Node Interconnect IP-Adresse für interne Kommunikation |  
 
 
 | DNS-Hostname für den ersten Knoten |  

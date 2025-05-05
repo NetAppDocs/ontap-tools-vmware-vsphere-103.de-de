@@ -81,6 +81,9 @@ NOTE: Speichern Sie niemals ONTAP Tools für VMware vSphere Virtual Machine auf 
 
 NOTE: Pure IPv6 wird nicht unterstützt. Der gemischte Modus wird mit VLAN unterstützt, das sowohl IPv6- als auch IPv4-Adressen enthält.
 
+** Die IP-Adresse des ONTAP Tools ist die primäre Schnittstelle zur Kommunikation mit ONTAP Tools.
+** IPv4 ist die IP-Adresskomponente der Knotenkonfiguration, die zur Aktivierung von Diagnose-Shell und SSH-Zugriff auf den Knoten für Debugging und Wartung verwendet werden kann.
+** Die IP-Adresse des Node Interconnect wird für die interne Kommunikation verwendet.
 
 
 . Aktivieren Sie bei Verwendung der vCenter Server 8.0.3-Version im Fenster *Hardware anpassen* die Optionen *CPU Hot add* und *Memory Hot Plug*, um HA-Funktionen zu ermöglichen.
