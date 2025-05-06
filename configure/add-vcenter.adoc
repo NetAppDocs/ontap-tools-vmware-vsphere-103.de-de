@@ -21,6 +21,10 @@ Durch die Integration mit vCenter können Sie mit ONTAP Tools Storage-Aufgaben w
 . Öffnen Sie einen Webbrowser, und navigieren Sie zur URL: `\https://<ONTAPtoolsIP>:8443/virtualization/ui/`
 . Melden Sie sich mit den ONTAP Tools für VMware vSphere Administrator-Anmeldeinformationen an, die Sie während der Implementierung angegeben haben.
 . Wählen Sie *vCenters* > *Add*, um die vCenter Server-Instanzen zu integrieren. Geben Sie die vCenter-IP-Adresse oder den Hostnamen, den Benutzernamen, das Kennwort und die Portdetails an.
++
+
+NOTE: Sie benötigen kein Administratorkonto, um vCenter Instanzen zu ONTAP Tools hinzuzufügen. Sie können eine benutzerdefinierte Rolle ohne Administratorkonto mit eingeschränkten Berechtigungen erstellen. Weitere Informationen finden Sie unter link:../concepts/rbac-vcenter-use.html["Nutzen Sie die RBAC für vCenter Server mit ONTAP Tools für VMware vSphere 10"] .
+
 
 
 Das Hinzufügen einer vCenter Server-Instanz zu ONTAP Tools löst automatisch die folgenden Aktionen aus:
