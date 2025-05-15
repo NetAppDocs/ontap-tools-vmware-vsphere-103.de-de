@@ -50,23 +50,14 @@ Auf einem ESXi-Host können Sie die folgenden Werte festlegen:
 
 === HBA/CNA-Adaptereinstellungen
 
-Legt die empfohlenen Einstellungen für das HBA-Zeitlimit für NetApp-Speichersysteme fest.
+Setzt die folgenden Parameter auf Standardwerte:
 
-|===
-| Parameter | Wert festlegen auf... 
-
-
-| Disk.QFullSampleSize | 32 für alle Konfigurationen. Durch die Festlegung dieses Wertes werden I/O-Fehler verhindert. 
-
-
-| Disk.QFullThreshold | 8 für alle Konfigurationen. Durch die Festlegung dieses Wertes werden I/O-Fehler verhindert. 
+* Disk.QFullSampleSize
+* Disk.QFullThreshold
+* Emulex FC-HBA-Zeitüberschreitungen
+* QLogic FC-HBA-Zeitüberschreitungen
 
 
-| Emulex FC-HBA-Zeitüberschreitungen | Standardwert. 
-
-
-| QLogic FC-HBA-Zeitüberschreitungen | Standardwert. 
-|===
 
 
 === MPIO-Einstellungen
