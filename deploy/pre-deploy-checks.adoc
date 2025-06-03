@@ -60,10 +60,10 @@ Verwenden Sie das folgende Arbeitsblatt, um die erforderlichen Informationen fü
 | Anforderungen | Ihr Wert 
 
 
-| IP-Adresse für die Anwendung ONTAP Tools |  
+| IP-Adresse für die ONTAP-Tools-Anwendung. Dies ist die IP-Adresse für den Zugriff auf die ONTAP-Tools-Weboberfläche |  
 
 
-| Node Interconnect IP-Adresse für interne Kommunikation |  
+| Virtuelle IP-Adresse der ONTAP-Tools für die interne Kommunikation. Diese IP-Adresse wird für die interne Kommunikation in einem Setup mit mehreren ONTAP-Tools-Instanzen verwendet. Diese IP-Adresse darf nicht mit der IP-Adresse der ONTAP-Tools-Anwendung identisch sein. |  
 
 
 | DNS-Hostname für den ersten Knoten |  
@@ -78,7 +78,7 @@ Verwenden Sie das folgende Arbeitsblatt, um die erforderlichen Informationen fü
 | DNS-Suchdomäne |  
 
 
-| IPv4-Adresse für den primären Node |  
+| IPv4-Adresse für den ersten Knoten. Dies ist eine eindeutige IPv4-Adresse für die Knotenverwaltungsschnittstelle im Verwaltungsnetzwerk. |  
 
 
 | Subnetzmaske für die IPv4-Adresse |  

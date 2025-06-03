@@ -64,9 +64,9 @@ Fügen Sie über die Benutzeroberfläche von ONTAP Tools lokale Storage-Back-End
 * link:../configure/associate-storage-backend.html["Ordnen Sie das Storage-Back-End einer vCenter Server-Instanz zu"]
 
 
-.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-6.png["Sechs"] Aktualisieren Sie die Zertifikate, wenn Sie mit mehreren vCenter-Servern arbeiten
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-6.png["Sechs"] Aktualisieren Sie die Zertifikate, wenn Sie mit mehreren vCenter Server-Instanzen arbeiten
 [role="quick-margin-para"]
-Wenn Sie mit mehreren vCenter-Servern arbeiten, aktualisieren Sie das selbstsignierte Zertifikat auf ein Zertifikat (CA) mit signiertem Zertifikat.
+Wenn Sie mit mehreren vCenter Server-Instanzen arbeiten, aktualisieren Sie das selbstsignierte Zertifikat auf ein von einer Zertifizierungsstelle (CA) signiertes Zertifikat.
 
 [role="quick-margin-list"]
 * link:../manage/certificate-manage.html["Verwalten von Zertifikaten"]
