@@ -67,6 +67,9 @@ MPIO-Einstellungen definieren die bevorzugten Pfade für NetApp-Speichersysteme.
 In hochperformanten Umgebungen oder wenn Sie die Performance mit einem einzelnen LUN-Datastore testen, sollten Sie eventuell die Load-Balancing-Einstellung der Round-Robin (VMW_PSP_RR) Path Selection Policy (PSP) von der Standard-IOPS-Einstellung von 1000 auf den Wert 1 ändern.
 
 
+NOTE: Die MPIO-Einstellungen gelten nicht für die Protokolle NVMe, NVMe/FC und NVMe/TCP.
+
+
 
 === NFS-Einstellungen
 

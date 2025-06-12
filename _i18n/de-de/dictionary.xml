@@ -2164,4 +2164,5 @@
   <block id="cc2976705cd90914f7093a509084c243" category="paragraph">Wenn Sie mit mehreren vCenter Server-Instanzen arbeiten, aktualisieren Sie das selbstsignierte Zertifikat auf ein von einer Zertifizierungsstelle (CA) signiertes Zertifikat.</block>
   <block id="15f0aef685a07d8a64ee213328fd4abf" category="list-text">Bestimmen Sie die ONTAP-Tools für den VMware vSphere-Bereitstellungstyp aus der ersten Knoten-VM.</block>
   <block id="843e69439f5c77bf5c54644b48190fc1" category="admonition">Für ONTAP-Tools für die VMware vSphere HA-Bereitstellung sollten Sie das Benutzerkennwort der Wartungskonsole auf dem ersten Knoten (Knoten1) ändern.</block>
+  <block id="56564ecb20e9cb45429b432b22f216f4" category="admonition">Die MPIO-Einstellungen gelten nicht für die Protokolle NVMe, NVMe/FC und NVMe/TCP.</block>
 </blocks>
