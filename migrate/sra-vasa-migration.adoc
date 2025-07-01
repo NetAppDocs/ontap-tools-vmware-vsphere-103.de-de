@@ -1,0 +1,175 @@
+---
+permalink: migrate/sra-vasa-migration.html 
+sidebar: sidebar 
+keywords: migrate 
+summary: Bei der Migration von Storage-Daten werden Storage-Back-Ends manuell über REST-APIs integriert. Bei der Migration von VASA Provider-Daten werden die Daten aus der bestehenden Derby-Datenbank exportiert und in die MongoDB-Datenbank importiert. 
+---
+= Migrieren Sie den VASA-Anbieter und aktualisieren Sie die SRA
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+
+
+== Schritte zur Migration des VASA-Anbieters
+
+. Um Derby-PORT 1527 auf den vorhandenen ONTAP-Tools für VMware vSphere zu aktivieren, aktivieren Sie den Root-Benutzer und melden Sie sich über SSH an der CLI an. Führen Sie dann den folgenden Befehl aus:
++
+[listing]
+----
+iptables -I INPUT 1 -p tcp --dport 1527 -j ACCEPT
+----
+. Implementieren Sie OVA für ONTAP Tools für VMware vSphere 10.3.
+. Fügen Sie die vCenter Server-Instanz hinzu, die Sie zu ONTAP-Tools für die Version VMware vSphere 10.3 migrieren möchten. Weitere Informationen finden Sie unter link:../configure/add-vcenter.html["Fügen Sie eine vCenter Server-Instanz hinzu"] .
+. Integrieren Sie das Speicher-Backend lokal von den vCenter-Server-APIs für das ONTAP-Tools-Plug-In.
+. Geben Sie die folgende API von Swagger oder in Postman zur Migration aus.
++
+Curl -X-STÜTZE https://xx.xx.xx.xx:8443/virtualization/api/v1/vcenters/{vcguid}/migration-jobs[]
+
++
+Sie können über diese URL auf Swagger zugreifen: `https://$FQDN_IP_PORT/, zum Beispiel: https://10.67.25.33:8443/[].
+
++
+[]
+====
+*HTTP-Methode und Endpunkt*
+
+Dieser REST-API-Aufruf verwendet die folgende Methode und den folgenden Endpunkt.
+
+|===
+
+
+| *HTTP-Methode* | *Pfad* 
+
+
+| POST | /API/v1 
+|===
+*Verarbeitungsart*
+
+Asynchron
+
+*Beispiel für Curl*
+
+curl -X POST 'https://<OTV-NG-IP>:8443/virtualization/api/v1/vcenters/<vcguid>/migration-jobs'[] \ --header 'x-auth: <auth_token>' \ --header 'Content-Type: application/json' \ --data '{ "otv_ip": "xx.xx.xx.xx", "vasa_provider_credentials": { "Benutzername": "xxxxx", "Passwort": "******" }, "Datenbankpasswort": "******" }'
+
+Request Body für andere Release-Migration:
+
+{ "otv_ip": "xx.xx.xx.xx", "vasa_provider_credentials": { "Benutzername": "xxxxx", "Passwort": "*******" } }
+
+*JSON-Ausgabebeispiel*
+
+Ein Jobobjekt wird zurückgegeben. Sie sollten die Jobkennung speichern, um sie im nächsten Schritt zu verwenden.
+
+{ „id“: 123, „Migration_id“: „D50073ce-35b4-4c51-9d2e-4ce66f802c35“, „Status“: „Läuft“ }
+
+====
+. Verwenden Sie den folgenden URI in Swagger, um den Status zu überprüfen:
++
+[listing]
+----
+curl https://xx.xx.xx.xxx:8443/virtualization/api/jobmanager/v2/jobs/<JobID>?includeSubJobsAndTasks=true
+----
++
+Überprüfen Sie nach Abschluss des Jobs den Migrationsbericht. Dieser Bericht ist in den Jobdaten enthalten und kann über die Jobantwort abgerufen werden.
+
+. Fügen Sie die ONTAP-Tools für den VMware vSphere-Speicheranbieter zum vCenter Server hinzu und link:../configure/registration-process.html["Registrieren Sie den VASA Provider"] mit ONTAP-Tools für VMware vSphere.
+. link:../manage/enable-services.html["Aktivieren Sie VASA Provider"] Service auf ONTAP Tools für VMware vSphere 10.3.
+. Stoppen Sie ONTAP Tools für den VMware vSphere Storage Provider 9.10/9.11/9.12/9.13 VASA Provider Service von der Wartungskonsole aus.
++
+Löschen Sie VASA Provider nicht.
+
++
+Sobald der alte VASA Provider angehalten wurde, erfolgt ein Failover des vCenter Servers zu den ONTAP Tools für VMware vSphere. Der Zugriff auf alle Datenspeicher und VMs erfolgt über ONTAP Tools für VMware vSphere.
+
+. Die NFS- und VMFS-Datenspeicher, die aus den ONTAP-Tools für VMware vSphere 9.xxx migriert wurden, sind erst in den ONTAP-Tools für VMware vSphere 10.3 sichtbar, nachdem der Datastore-Erkennungsauftrag ausgelöst wurde. Das dauert bis zu 30 Minuten. Überprüfen Sie, ob die Datenspeicher auf der Übersichtsseite der ONTAP-Tools für die Benutzeroberflächenseite des VMware vSphere-Plugins sichtbar sind.
+. Führen Sie die Patch-Migration mit der folgenden API in Swagger oder in Postman durch:
++
+[]
+====
+*HTTP-Methode und Endpunkt*
+
+Dieser REST-API-Aufruf verwendet die folgende Methode und den folgenden Endpunkt.
+
+|===
+
+
+| *HTTP-Methode* | *Pfad* 
+
+
+| PATCH | /API/v1 
+|===
+*Verarbeitungsart*
+
+Asynchron
+
+*Beispiel für Curl*
+
+Curl -X-PATCH  https://xx.xx.xx.xx:8443/virtualization/api/v1/vcenters/56d373bd-4163-44f9-a872-9adabb008ca9/migration-jobs/84dr73bd-9173-65r7-w345-8ufdbb887d43[]
+
+*JSON-Ausgabebeispiel*
+
+Ein Jobobjekt wird zurückgegeben. Sie sollten die Jobkennung speichern, um sie im nächsten Schritt zu verwenden.
+
+{ „id“: 123, „Migration_id“: „D50073ce-35b4-4c51-9d2e-4ce66f802c35“, „Status“: „Läuft“ }
+
+Der Anforderungskörper ist für den Patchvorgang leer.
+
+
+NOTE: UUID ist die Migrations-UUID, die als Antwort auf die API nach der Migration zurückgegeben wird.
+
+Nach Ausführung der Patch-Migrations-API halten alle VMs die Storage-Richtlinie ein.
+
+====
+
+
+.Wie es weiter geht
+Gehen Sie nach Abschluss der Migration und Registrierung der ONTAP-Tools 10.3 auf dem vCenter Server wie folgt vor:
+
+* Warten Sie, bis *Discovery* abgeschlossen ist. Die Zertifikate werden automatisch auf allen Hosts aktualisiert.
+* Warten Sie ausreichend Zeit, bevor Sie den Datastore- und VM-Betrieb initiieren. Die erforderliche Wartezeit variiert je nach Anzahl der Hosts, Datastores und virtuellen Maschinen in der Konfiguration. Eine Nichtbeachtung der Wartezeit kann zu sporadischen Betriebsfehlern führen.
+
+
+Wenn der Compliance-Zustand der virtuellen Maschine nach dem Upgrade veraltet ist, wenden Sie die Speicherrichtlinie erneut an, indem Sie die folgenden Schritte ausführen:
+
+. Navigieren Sie zum Datenspeicher, und wählen Sie *Zusammenfassung* > *VM Storage Policies*.
++
+Der Compliance-Status unter *VM Storage Policy Compliance* wird als *veraltet* angezeigt.
+
+. Wählen Sie die Richtlinie Storage VM und die entsprechende VM aus
+. Wählen Sie *Anwenden*
++
+Der Compliance-Status unter *VM Storage Policy Compliance* wird nun als konform angezeigt.
+
+
+
+.Verwandte Informationen
+* link:../concepts/rbac-learn-about.html["Erfahren Sie mehr über ONTAP Tools für die rollenbasierte Zugriffssteuerung von VMware vSphere 10"]
+* link:../upgrade/upgrade-ontap-tools.html["Upgrade von ONTAP Tools für VMware vSphere 10.x auf 10.3"]
+
+
+
+
+== Schritte zum Aktualisieren des Storage Replication Adapters (SRA)
+
+.Bevor Sie beginnen
+Im Wiederherstellungsplan bezeichnet der geschützte Standort den Ort, an dem die VMs aktuell ausgeführt werden, während der Wiederherstellungsstandort der Ort ist, an dem die VMs wiederhergestellt werden. Die SRM-Oberfläche zeigt den Status des Wiederherstellungsplans mit Details zu den geschützten und den Wiederherstellungsstandorten an. Im Wiederherstellungsplan sind die Schaltflächen „BEREINIGEN“ und „NEU SCHÜTZEN“ deaktiviert, während die Schaltflächen „TESTEN“ und „AUSFÜHREN“ aktiviert bleiben. Dies zeigt an, dass der Standort für die Datenwiederherstellung vorbereitet ist. Stellen Sie vor der Migration des SRA sicher, dass sich ein Standort im geschützten Zustand und der andere im Wiederherstellungszustand befindet.
+
+
+NOTE: Starten Sie die Migration nicht, wenn das Failover abgeschlossen wurde, der erneute Schutz jedoch aussteht. Stellen Sie sicher, dass der erneute Schutz abgeschlossen ist, bevor Sie mit der Migration fortfahren. Wenn ein Test-Failover ausgeführt wird, bereinigen Sie das Test-Failover, und starten Sie die Migration.
+
+. Führen Sie diese Schritte aus, um den SRA-Adapter für ONTAP-Tools für VMware vSphere 9.xx in der VMware-Standortwiederherstellung zu löschen:
++
+.. Wechseln Sie zur Seite VMware Live Site Recovery Configuration Management
+.. Gehen Sie zum Abschnitt *Storage Replication Adapter*.
+.. Wählen Sie im Auslassungsmenü *Konfiguration zurücksetzen*.
+.. Wählen Sie im Auslassungsmenü *Löschen*.
+
+
+. Führen Sie diese Schritte sowohl an Sicherungs- als auch an Recovery-Standorten aus.
++
+.. Installieren Sie ONTAP-Tools für den VMware vSphere 10.3 SRA-Adapter mithilfe der Schritte in link:../protect/configure-on-srm-appliance.html["Konfigurieren Sie SRA auf der VMware Live Site Recovery-Appliance"].
+.. Führen Sie auf der VMware Live Site Recovery-Benutzeroberflächenseite die Vorgänge *Arrays ermitteln* und *Geräte ermitteln* aus und bestätigen Sie, dass die Geräte wie vor der Migration angezeigt werden.
+
+
+

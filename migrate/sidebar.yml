@@ -1,4 +1,8 @@
 ---
 section: migrate
-title: Migrieren Sie die ONTAP-Tools für VMware vSphere 9.x zu 10.3
-url: "/migrate/migrate-to-latest-ontaptools.html"
+title: Migrieren Sie die ONTAP-Tools für VMware vSphere 9.xx zu 10.3
+entries:
+- title: Migrieren Sie zu den neuesten ONTAP-Tools für VMware vSphere
+  url: "/migrate/migrate-to-latest-ontaptools.html"
+- title: Migrieren Sie den VASA-Anbieter und aktualisieren Sie die SRA
+  url: "/migrate/sra-vasa-migration.html"
