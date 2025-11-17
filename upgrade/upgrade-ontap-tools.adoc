@@ -128,7 +128,13 @@ Es wird eine neue Festplatte erstellt. Die dynamische Storage-bereitstellung ers
 
 .Schritte
 . Laden Sie ONTAP-Tools für VMware vSphere hoch, aktualisieren Sie ISO in die Content Library.
-. Wählen Sie auf der primären VM-Seite *actions* > *Edit Settings* aus
+. Wählen Sie auf der primären VM-Seite *Aktionen* > *Einstellungen bearbeiten*. Um den primären VM-Namen zu ermitteln:
++
+.. Aktivieren Sie die Diagnose-Shell auf einem beliebigen Knoten.
+.. Führen Sie folgenden Befehl aus:
+`grep sourceHost /opt/netapp/meta/ansible_vars.yaml`
+
+
 . Wählen Sie die ISO-Datei der Inhaltsbibliothek im Fenster Einstellungen bearbeiten unter dem Feld *CD/DVD-Laufwerk* aus.
 . Wählen Sie die ISO-Datei und dann *OK*. Aktivieren Sie das Kontrollkästchen Verbunden im Feld *CD/DVD-Laufwerk*. image:../media/primaryvm-edit-settings.png["Einstellungen bearbeiten"]
 . Öffnen Sie im vCenter Server eine Konsole für ONTAP Tools.
