@@ -50,7 +50,7 @@ VMware unterstützt derzeit keine virtuellen Maschinen, die in einer VM-Vorlage 
 
 Der Klon einer geschützten Virtual Machine wird unterstützt.
 
-Weitere Informationen finden Sie unter https://docs.vmware.com/en/VMware-Horizon/2103/virtual-desktops/GUID-B5020738-8649-4308-A8B0-70AF80527DF6.html["Erstellen einer virtuellen Maschine zum Klonen"].
+Weitere Informationen finden Sie unter  https://docs.vmware.com/en/VMware-Horizon/2103/virtual-desktops/GUID-B5020738-8649-4308-A8B0-70AF80527DF6.html["Erstellen einer virtuellen Maschine zum Klonen"^].
 
 
 

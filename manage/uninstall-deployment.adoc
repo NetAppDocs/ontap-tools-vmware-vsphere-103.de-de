@@ -16,8 +16,8 @@ Durch das Deinstallieren der ONTAP-Tools für VMware vSphere werden alle Daten i
 .Schritte
 . Entfernen oder verschieben Sie alle virtuellen Maschinen aus den ONTAP-Tools für von VMware vSphere gemanagte Datastores.
 +
-** Informationen zum Entfernen der virtuellen Maschinen finden Sie unter https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-virtual-machine-administration-guide-8-0/managing-virtual-machinesvsphere-vm-admin/adding-and-removing-virtual-machinesvsphere-vm-admin.html#GUID-376174FE-F936-4BE4-B8C2-48EED42F110B-en["Entfernen Sie VMs und VM-Vorlagen und registrieren Sie sie erneut"]
-** Informationen zum Verschieben in einen nicht verwalteten Datastore finden Sie unter https://techdocs.broadcom.com/it/it/vmware-cis/vsphere/vsphere/8-0/vcenter-and-host-management-8-0/migrating-virtual-machines-host-management/migration-with-vmotion-host-management/migration-with-storage-vmotion-host-management.html["Storage vMotion"]
+** Informationen zum Entfernen der virtuellen Maschinen finden Sie unter https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-virtual-machine-administration-guide-8-0/managing-virtual-machinesvsphere-vm-admin/adding-and-removing-virtual-machinesvsphere-vm-admin.html#GUID-376174FE-F936-4BE4-B8C2-48EED42F110B-en["Entfernen Sie VMs und VM-Vorlagen und registrieren Sie sie erneut"^]
+** Informationen zum Verschieben in einen nicht verwalteten Datenspeicher finden Sie unter https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/migrate-a-virtual-machine-with-storage-vmotion.html["Storage vMotion"^]
 
 
 . link:../manage/delete-ds.html["Löschen Sie Datastores"] Auf ONTAP Tools für VMware vSphere erstellt.

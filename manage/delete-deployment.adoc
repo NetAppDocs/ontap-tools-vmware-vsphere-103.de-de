@@ -25,7 +25,7 @@ Wenn es sich um eine iSCSI-Bereitstellung handelt, müssen auch Initiatorgruppen
 +
 _Kubectl Beschreiben Sie dauerhafte Volumina.Name AWK -F'=' '{Print 2}'_
 
-. Entfernen Sie die VMs vom vCenter Server. Siehe https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-virtual-machine-administration-guide-8-0/managing-virtual-machinesvsphere-vm-admin/adding-and-removing-virtual-machinesvsphere-vm-admin.html#GUID-376174FE-F936-4BE4-B8C2-48EED42F110B-en["Entfernen Sie VMs und VM-Vorlagen und registrieren Sie sie erneut"].
-. Löschen Sie FlexVol Volumes aus dem ONTAP System Manager. Siehe https://docs.netapp.com/us-en/ontap/volumes/delete-flexvol-task.html["Löschen Sie ein FlexVol Volume"]. Geben Sie zum Löschen eines Volumes im CLI-Befehl den genauen Namen der FlexVol Volumes an.
-. Löschen Sie im Falle einer iSCSI-Bereitstellung SAN-Initiatorgruppen aus dem ONTAP-Speichersystem. Siehe https://docs.netapp.com/us-en/ontap/san-admin/manage-san-initiators-task.html["Zeigen Sie SAN-Initiatoren und -Initiatorgruppen an und verwalten Sie sie"].
+. Entfernen Sie die VMs vom vCenter Server. Siehe  https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-virtual-machine-administration-guide-8-0/managing-virtual-machinesvsphere-vm-admin/adding-and-removing-virtual-machinesvsphere-vm-admin.html#GUID-376174FE-F936-4BE4-B8C2-48EED42F110B-en["Entfernen Sie VMs und VM-Vorlagen und registrieren Sie sie erneut"^].
+. Löschen Sie FlexVol Volumes aus dem ONTAP System Manager. Siehe  https://docs.netapp.com/us-en/ontap/volumes/delete-flexvol-task.html["Löschen Sie ein FlexVol Volume"^]. Geben Sie im CLI-Befehl zum Löschen eines Volumes den genauen Namen der FlexVol Volumes an.
+. Löschen Sie die SAN-iGroups aus dem ONTAP-Speichersystem im Falle einer iSCSI-Bereitstellung. Siehe  https://docs.netapp.com/us-en/ontap/san-admin/manage-san-initiators-task.html["Zeigen Sie SAN-Initiatoren und -Initiatorgruppen an und verwalten Sie sie"^].
 

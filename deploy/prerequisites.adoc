@@ -140,7 +140,7 @@ In der folgenden Tabelle sind die Anzahl der VMware Live Site Recovery und die e
 
 | Mehr als 8 | Groß 
 |===
-Weitere Informationen finden Sie unter https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery/live-site-recovery/9-0/overview/site-recovery-manager-system-requirements/operational-limits-of-site-recovery-manager.html["Betriebsgrenzen der VMware Live Site Recovery"].
+Weitere Informationen finden Sie unter  https://techdocs.broadcom.com/us/en/vmware-cis/live-recovery/live-site-recovery/9-0/overview/site-recovery-manager-system-requirements/operational-limits-of-site-recovery-manager.html["Betriebsgrenzen der VMware Live Site Recovery"^].
 
 
 

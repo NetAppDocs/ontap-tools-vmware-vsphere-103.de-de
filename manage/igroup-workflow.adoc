@@ -220,7 +220,7 @@ Während der Migration:
 Dadurch wird die Einhaltung des hierarchischen Modells sichergestellt.
 
 .Verwandte Themen
-https://docs.netapp.com/us-en/ontap/san-admin/igroups-concept.html["Allgemeines zu Initiatorgruppen"]
+https://docs.netapp.com/us-en/ontap/san-admin/igroups-concept.html["Allgemeines zu Initiatorgruppen"^]
 
 
 
@@ -237,4 +237,4 @@ Wenn Sie einen NFS-Datenspeicher von einem ESXi-Host löschen oder unmounten, en
 Die Zuweisung der Exportrichtlinie unterscheidet sich, wenn sie in verschiedenen Datenspeichern wiederverwendet wird. Bei der Wiederverwendung der Exportrichtlinie können Sie die neue Host-IP-Adresse anhängen. Beim Löschen oder Unmounten eines Datenspeichers mit einer freigegebenen Exportrichtlinie wird die Richtlinie nicht gelöscht. Sie bleibt unverändert, und die Host-IP-Adresse wird nicht entfernt, da sie mit den anderen Datenspeichern gemeinsam genutzt wird. Die Wiederverwendung von Exportrichtlinien wird nicht empfohlen, da dies zu Zugriffs- und Latenzproblemen führen kann.
 
 .Verwandte Themen
-https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html["Erstellen Sie eine Exportrichtlinie"]
+https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html["Erstellen Sie eine Exportrichtlinie"^]
